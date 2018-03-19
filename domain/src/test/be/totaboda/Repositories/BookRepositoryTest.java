@@ -10,6 +10,9 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class BookRepositoryTest {
 
 
@@ -44,8 +47,12 @@ public class BookRepositoryTest {
     }
 
     @Test
-    void getBookInformationISBN_givenInexistentISBN_throwIllegalArgumentException(){
-        
+    void getBookInformationISBN_givenNonExistentISBN_throwIllegalArgumentException(){
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+           BookRepository.getBookInformationISBN("xoxo");
+        });
+
+        assertEquals(exception.getMessage(), "No book found for isbn:xoxo");
     }
 
 
