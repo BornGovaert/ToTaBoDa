@@ -4,6 +4,7 @@ import be.totaboda.Book.Author;
 import be.totaboda.Book.Book;
 import be.totaboda.Repositories.BookRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,20 +17,15 @@ public class BookService {
         return BookRepository.getBooks();
     }
 
-    public Book getBook(String isbn) {
+    public List<Book> getBook(String isbn) {
         try {
             return BookRepository.getBookInformation(isbn);
         } catch (IllegalArgumentException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
-            return new Book(isbn, "Unknown Title", new Author("Unknown id", "Unknownd FirstName", "Unknown Lastname"));
+            List<Book> testList = new ArrayList<>();
+            testList.add(new Book(isbn, "Unknown Title", new Author("Unknown id", "Unknownd FirstName", "Unknown Lastname")));
+            return testList;
         }
-    }
-
-
-    public Book getBook2(String isbn) {
-isbn.matches("1")
-        23456789
-        "1"
     }
 
 }
