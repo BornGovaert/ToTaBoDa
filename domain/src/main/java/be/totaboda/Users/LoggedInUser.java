@@ -1,5 +1,8 @@
 package be.totaboda.Users;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class LoggedInUser {
     private String Inss, lastName, firstName, eMail, streetName, streetNumber, postalCode, city;
     private int userId;
@@ -58,6 +61,11 @@ public class LoggedInUser {
     public static class UserBuilder {
         private String Inss, lastName, firstName, eMail, streetName, streetNumber, postalCode, city;
         private int userId;
+
+        public static final Pattern VALID_EMAIL =
+                Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+
         public static UserBuilder BuildAPerson() {
             return new UserBuilder();
         }
@@ -93,7 +101,7 @@ public class LoggedInUser {
         }
 
         public UserBuilder withEMail(String eMail) {
-            this.eMail = eMail;
+            validateEmailAddress(eMail);
             return this;
         }
 
@@ -115,6 +123,19 @@ public class LoggedInUser {
         public UserBuilder withCity(String city) {
             this.city = city;
             return this;
+        }
+
+        private void validateEmailAddress(String emailAddress) {
+            if (isValidEmailAddress(emailAddress)) {
+                this.eMail = emailAddress;
+            }
+            else {
+                throw new IllegalArgumentException("Please provide a valid e-mail address.\nCorrect Format: \"xx@xx.xx\"");
+            }
+        }
+        private static boolean isValidEmailAddress(String email) {
+            Matcher matcher = VALID_EMAIL.matcher(email);
+            return matcher.find();
         }
     }
 }
