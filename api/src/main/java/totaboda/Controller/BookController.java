@@ -1,4 +1,4 @@
-package totaboda;
+package totaboda.Controller;
 
 public class BookController {
 }
