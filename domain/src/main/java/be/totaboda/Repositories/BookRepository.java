@@ -19,6 +19,8 @@ public class BookRepository {
             Maps.newHashMap(
                     new ImmutableMap.Builder<String, Book>()
                             .put("123", new Book("123", "Azkaban", AuthorRepository.getAuthorDatabase().get("1")))
+                            .put("123", new Book("123", "DaVinci", AuthorRepository.getAuthorDatabase().get("2")))
+                            .put("123", new Book("123", "Kaas", AuthorRepository.getAuthorDatabase().get("3")))
                             .build()
             );
 
@@ -65,14 +67,29 @@ public class BookRepository {
     public static List<Book> getBookGivenPartialAuthor(String author) throws IllegalArgumentException {
         List<Book> books = new ArrayList<>();
         for (Book book : bookDatabase.values()) {
+            if (author.contains(" ")) {
+                String[] parts = author.split(" ");
 
-            String[] parts = author.split(" ");
-            if (author.matches("(.*)" + book.getAuthor().getFirstName() + "(.*)")) {
-                books.add(book);
-            } else if (author.matches("(.*)" + book.getAuthor().getFirstName() + "(.*)")) {
-                books.add(book);
+                if (parts[1].matches("(.*)" + book.getAuthor().getFirstName() + "(.*)")) {
+                    books.add(book);
+                } else if (parts[1].matches("(.*)" + book.getAuthor().getLastName() + "(.*)")) {
+                    books.add(book);
+                } else if (parts[2].matches("(.*)" + book.getAuthor().getFirstName() + "(.*)")) {
+                    books.add(book);
+                } else if (parts[2].matches("(.*)" + book.getAuthor().getLastName() + "(.*)")) {
+                    books.add(book);
+                } else {
+                    throw new IllegalArgumentException(String.format("No books found for author:%s", author));
+                }
             } else {
-                throw new IllegalArgumentException(String.format("No books found for author:%s", author));
+                if (author.matches("(.*)" + book.getAuthor().getFirstName() + "(.*)")) {
+                    books.add(book);
+                } else if (author.matches("(.*)" + book.getAuthor().getLastName() + "(.*)")) {
+                    books.add(book);
+                }
+                else {
+                    throw new IllegalArgumentException(String.format("No books found for author:%s", author));
+                }
             }
         }
         return books;
@@ -82,5 +99,17 @@ public class BookRepository {
         return new ArrayList<Book>(bookDatabase.values());
     }
 
+    public static Book createBook(String isbn,Book book) {
+        return bookDatabase.put("", book);
+    }
 
+    public static void deleteBook(String isbn) throws IllegalArgumentException {
+        for (Book book : bookDatabase.values()) {
+            if (book.getIsbn().equals(isbn)) {
+                bookDatabase.remove(isbn);
+            } else {
+                throw new IllegalArgumentException(String.format("No book found for isbn:%s", isbn));
+            }
+        }
+    }
 }
