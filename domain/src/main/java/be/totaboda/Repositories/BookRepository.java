@@ -9,10 +9,13 @@ import java.util.HashMap;
 
 public class BookRepository {
 
+    private AuthorRepository authorRepository = new AuthorRepository();
+
+
     private static HashMap<String, Book>bookDatabase =
             Maps.newHashMap(
                     new ImmutableMap.Builder<String, Book>()
-                            .put("123", new Book("123","Azkaban",  new Author("1234","JK", "Rowling")))
+                            .put("123", new Book("123","Azkaban", AuthorRepository.getAuthorDatabase().get("1")))
                     .build()
             );
 }
