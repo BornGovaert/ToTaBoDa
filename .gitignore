@@ -36,6 +36,7 @@ cmake-build-debug/
 
 # IntelliJ
 /out/
+.idea
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -62,7 +63,6 @@ fabric.properties
 # modules.xml
 # .idea/misc.xml
 # *.ipr
- .idea/
 
 # Sonarlint plugin
 .idea/sonarlint
