@@ -68,7 +68,7 @@ public class BookRepositoryTest {
         Book expectedBook2 = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
         Book notExpectedBook = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
 
-        List<Book> actualBooks = BookRepository.getBookInformationISBN("1");
+        List<Book> actualBooks = BookRepository.getBookInformationISBN("n");
 
         Assertions.assertThat(actualBooks).contains(expectedBook1, expectedBook2);
         Assertions.assertThat(actualBooks).doesNotContain(notExpectedBook);
@@ -81,6 +81,11 @@ public class BookRepositoryTest {
         });
 
         assertEquals(exception.getMessage(), "No book found for title:xoxo");
+    }
+
+    @Test
+    void getBookGivenPartialAuthor_happyPath(){
+
     }
 
 }
