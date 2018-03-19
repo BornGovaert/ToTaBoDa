@@ -5,7 +5,9 @@ import be.totaboda.Book.Book;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class BookRepository {
 
@@ -18,4 +20,23 @@ public class BookRepository {
                             .put("123", new Book("123","Azkaban", AuthorRepository.getAuthorDatabase().get("1")))
                     .build()
             );
+
+
+    public static Book getBookInformation(String isbn) throws IllegalArgumentException {
+        for book
+        if (bookDatabase.containsKey(isbn)) {
+            return bookDatabase.get(isbn);
+        } else {
+            throw new IllegalArgumentException(String.format("No book found for isbn:%s", isbn));
+        }
+    }
+
+
+
+
+    public static List<Book> getBooks() {
+        return new ArrayList<Book>(bookDatabase.values());
+    }
+
+
 }
