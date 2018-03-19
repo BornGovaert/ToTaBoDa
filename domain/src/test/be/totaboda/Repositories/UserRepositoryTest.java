@@ -1,24 +1,30 @@
 package be.totaboda.Repositories;
 
 import be.totaboda.Users.LoggedInUser;
+import org.assertj.core.api.Assert;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserRepositoryTest {
     private UserData mock;
-   private UserRepository testRepository;
-   private LoggedInUser user1;
-   private LoggedInUser user2;
+    private UserRepository testRepository;
+    private LoggedInUser user1;
+    private LoggedInUser user2;
 
     @BeforeEach
-    public void setUp(){
-        testRepository = new UserRepository();
+    public void setUp() {
+
         mock = Mockito.mock(UserData.class);
+        testRepository = new UserRepository(mock);
         user1 = LoggedInUser.UserBuilder.buildUser()
                 .withFirstName("T")
                 .withLastName("L")
@@ -43,22 +49,13 @@ class UserRepositoryTest {
     }
 
     @Test
-    public void getAllUsers_HappyPath(){
-    
+    public void getAllUsers_HappyPath() {
+        Mockito.when(mock.getDefaultUsers()).thenReturn(Arrays.asList(user1, user2));
+
+        testRepository = new UserRepository(mock);
+
+        List<LoggedInUser> expectedUsers = testRepository.getAllUsers();
+
+        Assertions.assertThat(expectedUsers).isEqualTo(Arrays.asList(user1,user2));
     }
-
-    @Test
-    public void getUserById_happyPath(){
-
-        Assertions.assertThat(testRepository.getUserById(0)).isEqualTo()
-    }
-
-    @Test
-    public void getUserById_whenIdThatDoesNotExistIsProvided_throwsAnException(){
-        Assertions.assertThatThrownBy(IllegalArgumentException.class,
-                (() -> testRepository.getUserById(5)))
-    }
-
-    @Test
-
 }
