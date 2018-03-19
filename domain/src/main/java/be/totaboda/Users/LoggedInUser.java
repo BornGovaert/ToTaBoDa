@@ -11,9 +11,9 @@ public class LoggedInUser {
         this.firstName = userBuilder.firstName;
         this.lastName = userBuilder.lastName;
         this.Inss = userBuilder.Inss;
-        this.eMail=userBuilder.eMail;
-        this.streetName=userBuilder.streetName;
-        this.streetNumber= userBuilder.streetNumber;
+        this.eMail = userBuilder.eMail;
+        this.streetName = userBuilder.streetName;
+        this.streetNumber = userBuilder.streetNumber;
         this.postalCode = userBuilder.postalCode;
         this.city = userBuilder.city;
 
@@ -23,16 +23,16 @@ public class LoggedInUser {
         this.userId = userId;
     }
 
-    public String getInss() {
-        return Inss;
+    public String getFirstName() {
+        return firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getInss() {
+        return Inss;
     }
 
     public String geteMail() {
@@ -67,7 +67,7 @@ public class LoggedInUser {
                 Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
 
-        public static UserBuilder BuildAPerson() {
+        public static UserBuilder buildUser() {
             return new UserBuilder();
         }
 
@@ -79,15 +79,15 @@ public class LoggedInUser {
         }
 
         private boolean allFieldsSet() {
-            return Inss!=null
-                && lastName!=null && firstName!=null
-                    && firstName!=null && eMail!=null
-                    && streetName!=null && streetNumber!=null
-                    && postalCode!=null && city!=null;
+            return Inss != null
+                    && lastName != null && firstName != null
+                    && firstName != null && eMail != null
+                    && streetName != null && streetNumber != null
+                    && postalCode != null && city != null;
         }
 
-        public UserBuilder withInss(String inss) {
-            Inss = inss;
+        public UserBuilder withFirstName(String firstName) {
+            this.firstName = firstName;
             return this;
         }
 
@@ -96,8 +96,8 @@ public class LoggedInUser {
             return this;
         }
 
-        public UserBuilder withFirstName(String firstName) {
-            this.firstName = firstName;
+        public UserBuilder withInss(String inss) {
+            Inss = inss;
             return this;
         }
 
@@ -129,11 +129,11 @@ public class LoggedInUser {
         private void validateEmailAddress(String emailAddress) {
             if (isValidEmailAddress(emailAddress)) {
                 this.eMail = emailAddress;
-            }
-            else {
+            } else {
                 throw new IllegalArgumentException("Please provide a valid e-mail address.\nCorrect Format: \"xx@xx.xx\"");
             }
         }
+
         private static boolean isValidEmailAddress(String email) {
             Matcher matcher = VALID_EMAIL.matcher(email);
             return matcher.find();
