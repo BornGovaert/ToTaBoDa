@@ -10,10 +10,10 @@ public class UserRepository {
     Map<Integer, LoggedInUser> users;
     private static int idCounter = 0;
 
-    public UserRepository() {
+    public UserRepository(UserData userData) {
         users = new HashMap<>();
-        UserData.getDefaultUsers()
-        .forEach(user -> addUser(user));
+        userData.getDefaultUsers()
+                .forEach(user -> addUser(user));
     }
 
     public LoggedInUser getUserById(int userId) {

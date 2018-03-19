@@ -2,12 +2,14 @@ package be.totaboda.Repositories;
 
 import be.totaboda.Users.LoggedInUser;
 
+import javax.inject.Named;
 import java.util.Arrays;
 import java.util.List;
 
+@Named
 class UserData {
 
-    public static List<LoggedInUser> getDefaultUsers() {
+    public List<LoggedInUser> getDefaultUsers() {
         return Arrays.asList(LoggedInUser.UserBuilder.buildUser()
                         .withFirstName("David")
                         .withLastName("Van den Bergh")
