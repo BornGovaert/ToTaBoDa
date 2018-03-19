@@ -12,10 +12,10 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="api" target="1.5" />
-      <module name="digibooky" target="1.5" />
-      <module name="domain" target="1.5" />
-      <module name="service" target="1.5" />
+      <module name="api" target="1.6" />
+      <module name="digibooky" target="1.6" />
+      <module name="domain" target="1.6" />
+      <module name="service" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>
