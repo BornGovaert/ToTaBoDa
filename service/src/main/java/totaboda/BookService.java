@@ -16,7 +16,7 @@ public class BookService {
         return BookRepository.getBooks();
     }
 
-    public Book getProfessor(String isbn) {
+    public Book getBook(String isbn) {
         try {
             return BookRepository.getBookInformation(isbn);
         } catch (IllegalArgumentException e) {
@@ -26,8 +26,10 @@ public class BookService {
     }
 
 
-    public Book getBook(String isbn) {
-
+    public Book getBook2(String isbn) {
+isbn.matches("1")
+        23456789
+        "1"
     }
 
 }
