@@ -58,7 +58,6 @@ class LoggedInUserTest {
                 .withInss("1234")
                 .build()).withMessage("Please provide all the necessary arguments.");
 
-
     }
     
 
