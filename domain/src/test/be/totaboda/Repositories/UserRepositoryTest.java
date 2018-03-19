@@ -6,16 +6,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserRepositoryTest {
+    private UserData mock;
    private UserRepository testRepository;
    private LoggedInUser user1;
    private LoggedInUser user2;
+
     @BeforeEach
     public void setUp(){
-        testRepository = Mockito.mock(UserRepository.class);
-        user1 = LoggedInUser.UserBuilder.BuildAPerson()
+        testRepository = new UserRepository();
+        mock = Mockito.mock(UserData.class);
+        user1 = LoggedInUser.UserBuilder.buildUser()
                 .withFirstName("T")
                 .withLastName("L")
                 .withEMail("t@t.be")
@@ -25,23 +29,22 @@ class UserRepositoryTest {
                 .withCity("c")
                 .withInss("4")
                 .build();
-        user2 = LoggedInUser.UserBuilder.BuildAPerson()
+
+        user2 = LoggedInUser.UserBuilder.buildUser()
                 .withFirstName("L")
                 .withLastName("T")
                 .withEMail("t@l.be")
-                .withStreetNumber("5")
-                .withStreetName("s")
+                .withStreetNumber("4")
+                .withStreetName("x")
                 .withPostalCode("1")
                 .withCity("c")
-                .withInss("4")
+                .withInss("3")
                 .build();
     }
 
     @Test
     public void getAllUsers_HappyPath(){
-        
-        testRepository.addUser()
-        Assertions.assertThat(testRepository.getAllUsers()).contains()
+    
     }
 
     @Test
