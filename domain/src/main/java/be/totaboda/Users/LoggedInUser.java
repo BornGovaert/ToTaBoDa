@@ -5,10 +5,54 @@ public class LoggedInUser {
     private int userId;
 
     private LoggedInUser(UserBuilder userBuilder) {
+        this.firstName = userBuilder.firstName;
+        this.lastName = userBuilder.lastName;
+        this.Inss = userBuilder.Inss;
+        this.eMail=userBuilder.eMail;
+        this.streetName=userBuilder.streetName;
+        this.streetNumber= userBuilder.streetNumber;
+        this.postalCode = userBuilder.postalCode;
+        this.city = userBuilder.city;
     }
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getInss() {
+        return Inss;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String geteMail() {
+        return eMail;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public String getStreetNumber() {
+        return streetNumber;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public int getUserId() {
+        return userId;
     }
 
     public static class UserBuilder {
