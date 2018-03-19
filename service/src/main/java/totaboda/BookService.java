@@ -17,15 +17,25 @@ public class BookService {
         return BookRepository.getBooks();
     }
 
-    public List<Book> getBook(String isbn) {
+    public List<Book> getBookISBN(String isbn) {
         try {
-            return BookRepository.getBookInformation(isbn);
+            return BookRepository.getBookInformationISBN(isbn);
         } catch (IllegalArgumentException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
-            List<Book> testList = new ArrayList<>();
-            testList.add(new Book(isbn, "Unknown Title", new Author("Unknown id", "Unknownd FirstName", "Unknown Lastname")));
-            return testList;
+            List<Book> bookList = new ArrayList<>();
+            bookList.add(new Book(isbn, "Unknown Title", new Author("Unknown id", "Unknown FirstName", "Unknown LastName")));
+            return bookList;
         }
     }
 
+    public List<Book> getbookTitle(String title){
+        try {
+            return BookRepository.getBookInformationTitle(title);
+        } catch (IllegalArgumentException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage());
+            List<Book> bookList = new ArrayList<>();
+            bookList.add(new Book("Unknown ISBN", title, new Author("Unknown id", "Unknown FirstName", "Unknown LastName")));
+            return bookList;
+        }
+    }
 }
