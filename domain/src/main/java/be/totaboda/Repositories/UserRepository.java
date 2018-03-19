@@ -1,4 +1,6 @@
-package be.totaboda.Users;
+package be.totaboda.Repositories;
+
+import be.totaboda.Users.LoggedInUser;
 
 import java.util.List;
 import java.util.Map;
@@ -22,5 +24,4 @@ public class UserRepository {
     public void removeUser(int userId) {
 
     }
-
 }
