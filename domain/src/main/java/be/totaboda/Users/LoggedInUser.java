@@ -16,6 +16,7 @@ public class LoggedInUser {
         this.streetNumber= userBuilder.streetNumber;
         this.postalCode = userBuilder.postalCode;
         this.city = userBuilder.city;
+
     }
 
     public void setUserId(int userId) {
