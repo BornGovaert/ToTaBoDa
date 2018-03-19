@@ -1,18 +1,16 @@
 package be.totaboda.Users;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.*;
 
 class LoggedInUserTest {
 
     @Test
     public void createALoggedInUser_HappyPath(){
-        LoggedInUser testUser = LoggedInUser.UserBuilder.BuildAPerson().withFirstName("T")
+        LoggedInUser testUser = LoggedInUser.UserBuilder.buildUser().withFirstName("T")
                 .withLastName("L")
                 .withStreetName("s")
                 .withStreetNumber("5")
@@ -34,7 +32,7 @@ class LoggedInUserTest {
     @Test
     public void createALoggedInUser_whenEmailIsNotAValidEmailAdress_throwsException(){
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(()->LoggedInUser.UserBuilder.BuildAPerson().withFirstName("T")
+                .isThrownBy(()->LoggedInUser.UserBuilder.buildUser().withFirstName("T")
                 .withLastName("L")
                 .withStreetName("s")
                 .withStreetNumber("5")
@@ -49,7 +47,7 @@ class LoggedInUserTest {
     @Test
     public void createALoggedInUser_whenloggedInUserIsNotCreatedWithAllTheArguments_throwsException(){
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(()->LoggedInUser.UserBuilder.BuildAPerson().withFirstName("T")
+                .isThrownBy(()->LoggedInUser.UserBuilder.buildUser().withFirstName("T")
                 .withLastName("L")
                 .withStreetName("s")
                 .withStreetNumber("5")
