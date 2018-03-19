@@ -26,12 +26,10 @@ public class BookRepositoryTest {
     @Test
     void getBookInformationISBN_happyPath(){
         Book expectedBook = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
-        Book notExpectedBook = new Book("123", "Azkaban", AuthorRepository.getAuthorDatabase().get("1"));
 
         List<Book> actualBooks = BookRepository.getBookInformationISBN("666");
 
-        Assertions.assertThat(actualBooks).contains(expectedBook);
-        Assertions.assertThat(actualBooks).doesNotContain(notExpectedBook);
+        Assertions.assertThat(actualBooks).containsExactly(expectedBook);
     }
 
     @Test
@@ -55,5 +53,34 @@ public class BookRepositoryTest {
         assertEquals(exception.getMessage(), "No book found for isbn:xoxo");
     }
 
+    @Test
+    void getBookInformationTitle_happyPath(){
+        Book expectedBook = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
+
+        List<Book> actualBooks = BookRepository.getBookInformationTitle("Kaas");
+
+        Assertions.assertThat(actualBooks).containsExactly(expectedBook);
+    }
+
+    @Test
+    void getBookInformationTitle_givenLetter_N_returnsListOfBooksContainingLetter_N(){
+        Book expectedBook1 = new Book("123", "Azkaban", AuthorRepository.getAuthorDatabase().get("1"));
+        Book expectedBook2 = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
+        Book notExpectedBook = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
+
+        List<Book> actualBooks = BookRepository.getBookInformationISBN("1");
+
+        Assertions.assertThat(actualBooks).contains(expectedBook1, expectedBook2);
+        Assertions.assertThat(actualBooks).doesNotContain(notExpectedBook);
+    }
+
+    @Test
+    void getBookInformationTitle_givenNonExistentTitle_throwIllegalArgumentException(){
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            BookRepository.getBookInformationTitle("xoxo");
+        });
+
+        assertEquals(exception.getMessage(), "No book found for title:xoxo");
+    }
 
 }
