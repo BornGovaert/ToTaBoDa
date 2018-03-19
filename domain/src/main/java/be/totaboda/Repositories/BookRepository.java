@@ -22,12 +22,12 @@ public class BookRepository {
                             .build()
             );
 
-    public static List<Book> getBookInformation(String isbn) throws IllegalArgumentException {
+    public static List<Book> getBookInformationISBN(String isbn) throws IllegalArgumentException {
         List<Book> listOfBooks = new ArrayList<>();
         for (Book book : bookDatabase.values()) {
             if (book.getIsbn().equals(isbn)) {
                 listOfBooks.add(bookDatabase.get(isbn));
-            } else if (isbn.matches("(.*)book.getIsbn()(.*)")) {
+            } else if (isbn.matches("(.*)" + book.getIsbn() + "(.*)")) {
                 listOfBooks.add(book);
             } else {
                 throw new IllegalArgumentException(String.format("No book found for isbn:%s", isbn));
@@ -36,6 +36,47 @@ public class BookRepository {
         return listOfBooks;
     }
 
+    public static List<Book> getBookInformationTitle(String title) throws IllegalArgumentException {
+        List<Book> listOfBooks = new ArrayList<>();
+        for (Book book : bookDatabase.values()) {
+            if (book.getIsbn().equals(title)) {
+                listOfBooks.add(bookDatabase.get(title));
+            } else if (title.matches("(.*)" + book.getTitle() + "(.*)")) {
+                listOfBooks.add(book);
+            } else {
+                throw new IllegalArgumentException(String.format("No book found for title:%s", title));
+            }
+        }
+        return listOfBooks;
+    }
+
+    public static List<Book> getBooksGivenAuthor(Author author) throws IllegalArgumentException {
+        List<Book> books = new ArrayList<>();
+        for (Book book : bookDatabase.values()) {
+            if (book.getAuthor() == author) {
+                books.add(book);
+            } else {
+                throw new IllegalArgumentException(String.format("No books found for author:%s", author));
+            }
+        }
+        return books;
+    }
+
+    public static List<Book> getBookGivenPartialAuthor(String author) throws IllegalArgumentException {
+        List<Book> books = new ArrayList<>();
+        for (Book book : bookDatabase.values()) {
+
+            String[] parts = author.split(" ");
+            if (author.matches("(.*)" + book.getAuthor().getFirstName() + "(.*)")) {
+                books.add(book);
+            } else if (author.matches("(.*)" + book.getAuthor().getFirstName() + "(.*)")) {
+                books.add(book);
+            } else {
+                throw new IllegalArgumentException(String.format("No books found for author:%s", author));
+            }
+        }
+        return books;
+    }
 
     public static List<Book> getBooks() {
         return new ArrayList<Book>(bookDatabase.values());
