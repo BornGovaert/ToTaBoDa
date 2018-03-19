@@ -13,9 +13,24 @@ public class LoggedInUser {
 
     public static class UserBuilder {
         private String Inss, lastName, firstName, eMail, streetName, streetNumber, postalCode, city;
-        private int userId;        
+        private int userId;
+        public static UserBuilder BuildAPerson() {
+            return new UserBuilder();
+        }
+
         public LoggedInUser build() {
-            return new LoggedInUser(this);
+            if (allFieldsSet()) {
+                return new LoggedInUser(this);
+            }
+            throw new IllegalArgumentException("Please provide all the necessary arguments.");
+        }
+
+        private boolean allFieldsSet() {
+            return Inss!=null
+                && lastName!=null && firstName!=null
+                    && firstName!=null && eMail!=null
+                    && streetName!=null && streetNumber!=null
+                    && postalCode!=null && city!=null;
         }
 
         public UserBuilder withInss(String inss) {
