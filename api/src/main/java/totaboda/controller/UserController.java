@@ -8,6 +8,8 @@ import totaboda.dtos.UserDto;
 import totaboda.mapper.UserMapper;
 
 import javax.inject.Inject;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
@@ -31,5 +33,12 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public UserDto getMember(@PathVariable int memberId) {
         return userMapper.memberToDto((Member) userService.getUser(memberId));
+    }
+
+    @GetMapping(path= "/members", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserDto> getMembers(){
+        List<Member> aList = userService.getAllMembers();
+        return aList.stream().map(x->userMapper.memberToDto(x)).collect(Collectors.toList());
     }
 }

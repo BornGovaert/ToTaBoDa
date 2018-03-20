@@ -1,10 +1,15 @@
 package totaboda;
 
+import org.assertj.core.api.Assertions;
+import org.mockito.Mockito;
+import totaboda.author.Author;
 import totaboda.author.AuthorRepository;
 import totaboda.book.Book;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import totaboda.BookService;
+import totaboda.book.BookRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,101 +18,77 @@ import static org.mockito.Mockito.*;
 
 public class BookServiceTest {
 
-    @Test
-    public void getBookISBN_givenCompleteExistingIsbnNumber_thenReturnBook() {
-        // GIVEN
-        BookService bookService = new BookService();
+    private BookRepository bookRepository;
+    private BookService bookService;
+    private List<Book> testList;
+    private Book book1;
+    private Book book2;
+    private Book book3;
 
-        // WHEN
-        List<Book> bookList = bookService.getBookISBN("999");
+    @BeforeEach
+    void setUp() {
 
-        // THEN
-        assertThat(bookList.get(0).getIsbn()).isEqualTo("999");
-        assertThat(bookList.get(0).getTitle()).isEqualTo("Zorro");
-        assertThat(bookList.get(0).getAuthor()).isEqualTo(AuthorRepository.getAuthorDatabase().get("4"));
+        //MOCKED CLASS
+        bookRepository = mock(BookRepository.class);
+
+        //DATA
+        testList = new ArrayList<>();
+
+        book1 = new Book("123", "Azkaban", AuthorRepository.getAuthorDatabase().get("1"));
+        book2 = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
+        book3 = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
+
+        testList.add(book1);
+        testList.add(book2);
+        testList.add(book3);
     }
 
-
-    //GIVEN UNKNOWN ISBN
-//    @Test
-//    public void getBookISBN_givenAUnknownBookIsbn_thenReturnBookWithUnknownNameAndNoPrice() {
-//        // GIVEN
-//        BookService bookService = new BookService();
-//
-//        // WHEN
-//        List<Book> actualBookList = bookService.getBookISBN("XXX");
-//
-//        // THEN
-//        assertThat(actualBookList.get(0).getIsbn()).isEqualTo("XXX");
-//        assertThat(actualBookList.get(0).getTitle()).isEqualTo("Unknown book");
-//        assertThat(actualBookList.get(0).getAuthor()).isNull();
+// @Test
+//    public void getUser_happyPath() {
+//        Mockito.when(mockRepository.getUserById(0)).thenReturn(member1);
+//        Mockito.when(mockRepository.assertThatUserExist(0)).thenReturn(true);
+//        Assertions.assertThat(userService.getUser(0)).isEqualTo(member1);
 //    }
 
+
     @Test
-    public void getBookTitle_givenCompleteExistingTitle_thenReturnBook() {
-        // GIVEN
-        BookService bookService = new BookService();
-
-        // WHEN
-        List<Book> bookList = bookService.getBookTitle("Zorro");
-
-        // THEN
-        assertThat(bookList.get(0).getIsbn()).isEqualTo("999");
-        assertThat(bookList.get(0).getTitle()).isEqualTo("Zorro");
-        assertThat(bookList.get(0).getAuthor()).isEqualTo(AuthorRepository.getAuthorDatabase().get("4"));
-    }
-    @Test
-    public void getBookByAuthor_givenAuthor_thenReturnBook() {
-        // GIVEN
-        BookService bookService = new BookService();
-
-        // WHEN
-        List<Book> bookList = bookService.getBookByAuthor(AuthorRepository.getAuthorDatabase().get("4"));
-
-        // THEN
-        assertThat(bookList.get(0).getIsbn()).isEqualTo("999");
-        assertThat(bookList.get(0).getTitle()).isEqualTo("Zorro");
-        assertThat(bookList.get(0).getAuthor()).isEqualTo(AuthorRepository.getAuthorDatabase().get("4"));
+    public void getBookISBN_happyPath() {
+        List<Book> returns = new ArrayList<>();
+        returns.add(book2);
+        Mockito.when(bookRepository.getBookInformationISBN("111")).thenReturn(returns);
+        Assertions.assertThat(bookService.getBookISBN("111")).isEqualTo(returns);
     }
 
+    @Test
+    public void getBookTitle_happyPath() {
+        List<Book> returns = new ArrayList<>();
+        returns.add(book3);
+        Mockito.when(bookRepository.getBookInformationTitle("Kaas")).thenReturn(returns);
+        Assertions.assertThat(bookService.getBookISBN("Kaas")).isEqualTo(returns);
+    }
 
+    @Test
+    public void getBookByAuthor_happyPath() {
+        List<Book> returns = new ArrayList<>();
+        returns.add(book1);
+        Mockito.when(bookRepository.getBooksGivenAuthor(new Author("1","JK", "Rowling"))).thenReturn(returns);
+        Assertions.assertThat(bookService.getBookByAuthor(new Author("1","JK", "Rowling"))).isEqualTo(returns);
+    }
+
+    @Test
+    public void getBookGivenPartialAuthorName_happyPath() {
+        List<Book> returns = new ArrayList<>();
+        returns.add(book2);
+        Mockito.when(bookRepository.getBookGivenPartialAuthor("brow")).thenReturn(returns);
+        Assertions.assertThat(bookService.getBookGivenPartialAuthorName("brow")).isEqualTo(returns);
+    }
+
+    
 
 }
 
-//
-//    private BookRepository mockRepo;
-//    private List<Book> testList;
-//    private Book book1;
-//    private Book book2;
-//    private Book book3;
-//
-//    @BeforeEach
-//    void setUp(){
-//
-//        //MOCKED CLASS
-//        mockRepo = mock(BookRepository.class);
-//
-//        //DATA
-//        testList = new ArrayList<>();
-//
-//        book1 = new Book("123", "Azkaban", AuthorRepository.getAuthorDatabase().get("1"));
-//        book2 = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
-//        book3 = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
-
-//        testList.add(book1);
-//        testList.add(book2);
-//        testList.add(book3);
 
 
 
-//    @Test
-//    void getBookISBN_thenMockCallingMethod(){
-//        testList.add(book3);
-//        BookService testService = new BookService(mockRepo);
-//
-//        when(mockRepo.getBookInformationISBN("666")).thenReturn(testList);
-//
-//        //Assertions.assertThat(testService.getBookISBN("666")).isEqualTo(testList);
-//        verify(BookRepository.getBookInformationISBN("666"), times(1));
-//    }
+
 
