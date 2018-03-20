@@ -1,7 +1,9 @@
 package totaboda;
 
 import be.totaboda.Repositories.UserRepository;
+import be.totaboda.Users.LoggedInUser;
 import be.totaboda.Users.Member;
+import totaboda.Exceptions.UnknownResourceException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,22 +18,30 @@ public class UserService {
         UserService.userRepository = userRepository;
     }
 
-    public Member getUser(int userID) {
+    public LoggedInUser getUser(int userID) throws UnknownResourceException {
         return null;
     }
 
-    public void removeUser(int userID) {
+    public void removeUser(int userID) throws UnknownResourceException {
     }
 
-    public Member addUser(Member user) {
+    public LoggedInUser addUser(LoggedInUser user) {
         return null;
     }
 
-    public List<Member> getAllUsers() {
+    public List<LoggedInUser> getAllUsers() {
         return null;
     }
 
-    public Member updateUser(int userID, Member user) {
+    public List<Member> getAllMembers() {
+        return null;
+    }
+
+    public List<Member> getAllEmployees() {
+        return null;
+    }
+
+    public LoggedInUser updateUser(int userID, Member user) throws UnknownResourceException {
         return null;
     }
 
