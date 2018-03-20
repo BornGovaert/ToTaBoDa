@@ -124,14 +124,13 @@ public class BookRepository {
     private static ArrayList<Book> backupBookList = new ArrayList<>();
 
     public static void deleteBook(String isbn) throws IllegalArgumentException {
-        for (Book book : bookDatabase.values()) {
-            if (book.getIsbn().equals(isbn)) {
-                backupBookList.add(book);
-                bookDatabase.remove(isbn);
-            } else {
-                throw new IllegalArgumentException(String.format("No book found for isbn:%s", isbn));
-            }
+        if (bookDatabase.containsKey(isbn)) {
+           // backupBookList.add(bookDatabase.get(isbn));
+            bookDatabase.remove(isbn);
+        } else if (!(bookDatabase.containsKey(isbn))) {
+            throw new IllegalArgumentException("Can't find a book with that isbn");
         }
+
     }
 
     public static void updateBook(Book book) {
