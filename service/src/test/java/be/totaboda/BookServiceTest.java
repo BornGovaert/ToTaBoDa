@@ -47,7 +47,7 @@ public class BookServiceTest {
         BookService bookService = new BookService();
 
         // WHEN
-        List<Book> bookList = bookService.getBookTitle("Zorro");
+        List<Book> bookList = bookService.getbookTitle("Zorro");
 
         // THEN
         assertThat(bookList.get(0).getIsbn()).isEqualTo("999");
@@ -55,19 +55,19 @@ public class BookServiceTest {
         assertThat(bookList.get(0).getAuthor()).isEqualTo(AuthorRepository.getAuthorDatabase().get("4"));
     }
 
-    @Test
-    public void getBook_givenCompleteExistingTitle_thenReturnBook() {
-        // GIVEN
-        BookService bookService = new BookService();
-
-        // WHEN
-        List<Book> bookList = bookService.getBookTitle("Zorro");
-
-        // THEN
-        assertThat(bookList.get(0).getIsbn()).isEqualTo("999");
-        assertThat(bookList.get(0).getTitle()).isEqualTo("Zorro");
-        assertThat(bookList.get(0).getAuthor()).isEqualTo(AuthorRepository.getAuthorDatabase().get("4"));
-    }
+//    @Test
+//    public void getBook_givenCompleteExistingTitle_thenReturnBook() {
+//        // GIVEN
+//        BookService bookService = new BookService();
+//
+//        // WHEN
+//        List<Book> bookList = bookService.getbookTitle("Zorro");
+//
+//        // THEN
+//        assertThat(bookList.get(0).getIsbn()).isEqualTo("999");
+//        assertThat(bookList.get(0).getTitle()).isEqualTo("Zorro");
+//        assertThat(bookList.get(0).getAuthor()).isEqualTo(AuthorRepository.getAuthorDatabase().get("4"));
+//    }
 
 //    @Test
 //    public void getBook_givenCompleteExistingIsbnNumber_thenReturnBook() {
