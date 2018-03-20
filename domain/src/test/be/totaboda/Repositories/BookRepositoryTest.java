@@ -92,8 +92,9 @@ public class BookRepositoryTest {
     @Test
     void getBooksGivenAuthor_givenNonExistingAuthor_throwIllegalArgumentException(){
         Author author = new Author("89", "Dag", "Allemal");
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-                BookRepository.getBooksGivenAuthor(author));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            BookRepository.getBooksGivenAuthor(author);
+        });
 
         assertEquals(exception.getMessage(), "No books found for author:"+ author);
     }
@@ -137,7 +138,8 @@ public class BookRepositoryTest {
         BookRepository newBookRepo = new BookRepository();
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
-                -> newBookRepo.createBook("testBook", "Serious Book Title", "Armstrong"));
+                -> { newBookRepo.createBook("testBook", "Serious Book Title", "Armstrong");
+        });
     }
 
     @Test
@@ -152,18 +154,27 @@ public class BookRepositoryTest {
 
     @Test
     void deleteBook_throwsException(){
-        Book bookToDelete = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
+        Book bookToDelete = new Book("456", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
 
         BookRepository newBookRepo = new BookRepository();
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
-                -> newBookRepo.deleteBook("111"));
+                -> { newBookRepo.deleteBook("456");
+        });
 
     }
 
     @Test
     void updateBook_happyPath(){
-        Assertions.fail("");
+        Book bookOldInfo = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
+        Book bookNewInfo = new Book("111", "Da Vinci Code", AuthorRepository.getAuthorDatabase().get("2"));
+
+        BookRepository newBookRepo = new BookRepository();
+        newBookRepo.updateBook(bookNewInfo);
+
+        Assertions.assertThat(newBookRepo.getBooks())
+                .contains(bookNewInfo)
+                .doesNotContain(bookOldInfo);
     }
 
     @Test
