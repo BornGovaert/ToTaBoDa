@@ -55,12 +55,12 @@ public class BookRepositoryTest {
     }
 
     @Test
-    void getBookInformationTitle_givenLetter_N_returnsListOfBooksContainingLetter_N(){
+    void getBookInformationTitle_givenLetter_Z_returnsListOfBooksContainingLetter_Z(){
         Book expectedBook1 = new Book("123", "Azkaban", AuthorRepository.getAuthorDatabase().get("1"));
-        Book expectedBook2 = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
+        Book expectedBook2 = new Book("999", "Zorro", AuthorRepository.getAuthorDatabase().get("4"));
         Book notExpectedBook = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
 
-        List<Book> actualBooks = BookRepository.getBookInformationTitle("n");
+        List<Book> actualBooks = BookRepository.getBookInformationTitle("z");
 
         Assertions.assertThat(actualBooks)
                 .containsExactlyInAnyOrder(expectedBook1, expectedBook2)
@@ -177,8 +177,8 @@ public class BookRepositoryTest {
                 .doesNotContain(bookOldInfo);
     }
 
-    @Test
-    void updateBook_throwsException(){
-        Assertions.fail("");
-    }
+//    @Test
+//    void updateBook_throwsException(){
+//        Assertions.fail("");
+//    }
 }

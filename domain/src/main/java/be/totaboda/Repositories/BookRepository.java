@@ -77,19 +77,19 @@ public class BookRepository {
             if (author.contains(" ")) {
                 String[] parts = author.split(" ");
 
-                if (book.getAuthor().getFirstName().contains(parts[1])) {
+                if (book.getAuthor().getFirstName().toLowerCase().contains(parts[1].toLowerCase())) {
                     listOfBooks.add(book);
-                } else if (book.getAuthor().getLastName().contains(parts[1])) {
+                } else if (book.getAuthor().getLastName().toLowerCase().contains(parts[1].toLowerCase())) {
                     listOfBooks.add(book);
-                } else if (book.getAuthor().getFirstName().contains(parts[2])) {
+                } else if (book.getAuthor().getFirstName().toLowerCase().contains(parts[2].toLowerCase())) {
                     listOfBooks.add(book);
-                } else if (book.getAuthor().getLastName().contains(parts[2])) {
+                } else if (book.getAuthor().getLastName().toLowerCase().contains(parts[2].toLowerCase())) {
                     listOfBooks.add(book);
                 }
             } else {
-                if (book.getAuthor().getFirstName().contains(author)) {
+                if (book.getAuthor().getFirstName().toLowerCase().contains(author.toLowerCase())) {
                     listOfBooks.add(book);
-                } else if (book.getAuthor().getLastName().contains(author)) {
+                } else if (book.getAuthor().getLastName().toLowerCase().contains(author.toLowerCase())) {
                     listOfBooks.add(book);
                 }
             }
@@ -107,7 +107,7 @@ public class BookRepository {
     public static Book createBook(String isbn, String title, String lastName) {
         ArrayList<Author> authorList = new ArrayList<>();
         for (Author author : AuthorRepository.getAuthorDatabase().values()) {
-            if (author.getLastName().equals(lastName)) {
+            if (author.getLastName().toLowerCase().equals(lastName.toLowerCase())) {
                 authorList.add(author);
             }
         }
