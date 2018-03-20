@@ -46,53 +46,55 @@ public class BookRepository {
                 listOfBooks.add(bookDatabase.get(title));
             } else if (title.matches("(.*)" + book.getTitle() + "(.*)")) {
                 listOfBooks.add(book);
-            } else {
-                throw new IllegalArgumentException(String.format("No book found for title:%s", title));
             }
+        }
+        if (listOfBooks.isEmpty()) {
+            throw new IllegalArgumentException(String.format("No book found for title:%s", title));
         }
         return listOfBooks;
     }
 
     public static List<Book> getBooksGivenAuthor(Author author) throws IllegalArgumentException {
-        List<Book> books = new ArrayList<>();
+        List<Book> listOfBooks = new ArrayList<>();
         for (Book book : bookDatabase.values()) {
             if (book.getAuthor() == author) {
-                books.add(book);
-            } else {
-                throw new IllegalArgumentException(String.format("No books found for author:%s", author));
+                listOfBooks.add(book);
             }
         }
-        return books;
+        if (listOfBooks.isEmpty()) {
+            throw new IllegalArgumentException(String.format("No book found for title:%s", author));
+        }
+
+        return listOfBooks;
     }
 
     public static List<Book> getBookGivenPartialAuthor(String author) throws IllegalArgumentException {
-        List<Book> books = new ArrayList<>();
+        List<Book> listOfBooks = new ArrayList<>();
         for (Book book : bookDatabase.values()) {
             if (author.contains(" ")) {
                 String[] parts = author.split(" ");
 
                 if (parts[1].matches("(.*)" + book.getAuthor().getFirstName() + "(.*)")) {
-                    books.add(book);
+                    listOfBooks.add(book);
                 } else if (parts[1].matches("(.*)" + book.getAuthor().getLastName() + "(.*)")) {
-                    books.add(book);
+                    listOfBooks.add(book);
                 } else if (parts[2].matches("(.*)" + book.getAuthor().getFirstName() + "(.*)")) {
-                    books.add(book);
+                    listOfBooks.add(book);
                 } else if (parts[2].matches("(.*)" + book.getAuthor().getLastName() + "(.*)")) {
-                    books.add(book);
-                } else {
-                    throw new IllegalArgumentException(String.format("No books found for author:%s", author));
+                    listOfBooks.add(book);
                 }
             } else {
                 if (author.matches("(.*)" + book.getAuthor().getFirstName() + "(.*)")) {
-                    books.add(book);
+                    listOfBooks.add(book);
                 } else if (author.matches("(.*)" + book.getAuthor().getLastName() + "(.*)")) {
-                    books.add(book);
-                } else {
-                    throw new IllegalArgumentException(String.format("No books found for author:%s", author));
+                    listOfBooks.add(book);
                 }
             }
         }
-        return books;
+        if (listOfBooks.isEmpty()) {
+            throw new IllegalArgumentException(String.format("No book found for title:%s", author));
+        }
+        return listOfBooks;
     }
 
     public static List<Book> getBooks() {
