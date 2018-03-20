@@ -1,6 +1,8 @@
 package be.totaboda.Repositories;
 
+import be.totaboda.Users.Employee;
 import be.totaboda.Users.LoggedInUser;
+import be.totaboda.Users.Member;
 
 import javax.inject.Named;
 import java.util.*;
@@ -51,5 +53,12 @@ public class UserRepository {
             throw new IllegalArgumentException("No such user found.");
         }
         return user;
+    }
+
+    public List<Member> getAllMembers() {
+        return null;
+    }
+    public List<Employee> getAllEmployees() {
+        return null;
     }
 }

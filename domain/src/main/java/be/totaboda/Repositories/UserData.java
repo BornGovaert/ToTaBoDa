@@ -1,6 +1,8 @@
 package be.totaboda.Repositories;
 
 import be.totaboda.Users.LoggedInUser;
+import be.totaboda.Users.Member;
+import be.totaboda.Users.UserBuilder;
 
 import javax.inject.Named;
 import java.util.Arrays;
@@ -10,7 +12,7 @@ import java.util.List;
 class UserData {
 
     public List<LoggedInUser> getDefaultUsers() {
-        return Arrays.asList(LoggedInUser.UserBuilder.buildUser()
+        return Arrays.asList(UserBuilder.buildUser()
                         .withFirstName("David")
                         .withLastName("Van den Bergh")
                         .withEMail("david@hotmail.com")
@@ -19,8 +21,8 @@ class UserData {
                         .withStreetNumber("53")
                         .withCity("Welle")
                         .withPostalCode("9473")
-                        .build(),
-                LoggedInUser.UserBuilder.buildUser()
+                        .buildMember(),
+                UserBuilder.buildUser()
                         .withFirstName("Thomas")
                         .withLastName("Laurent")
                         .withEMail("TomTom@hotmail.com")
@@ -29,8 +31,8 @@ class UserData {
                         .withStreetNumber("1001")
                         .withCity("NAMUR")
                         .withPostalCode("5000")
-                        .build(),
-                LoggedInUser.UserBuilder.buildUser()
+                        .buildMember(),
+                UserBuilder.buildUser()
                         .withFirstName("Bruce")
                         .withLastName("Wayne")
                         .withEMail("IMNOTREALLYBATMAN@hotmail.com")
@@ -39,6 +41,6 @@ class UserData {
                         .withStreetNumber("1")
                         .withCity("GOTHAM")
                         .withPostalCode("79990")
-                        .build());
+                        .buildMember());
     }
 }
