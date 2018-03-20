@@ -28,7 +28,7 @@ public class BookServiceTest {
     }
 
     @Test
-    public void getStock_givenAUnknownBookIsbn_thenReturnBookWithUnknownNameAndNoPrice() {
+    public void getBook_givenAUnknownBookIsbn_thenReturnBookWithUnknownNameAndNoPrice() {
         // GIVEN
         BookService bookService = new BookService();
 
@@ -39,6 +39,34 @@ public class BookServiceTest {
         assertThat(actualBookList.get(0).getIsbn()).isEqualTo("XXX");
         assertThat(actualBookList.get(0).getTitle()).isEqualTo("Unknown book");
         assertThat(actualBookList.get(0).getAuthor()).isNull();
+    }
+
+    @Test
+    public void getBook_givenCompleteExistingTitle_thenReturnBook() {
+        // GIVEN
+        BookService bookService = new BookService();
+
+        // WHEN
+        List<Book> bookList = bookService.getBookTitle("Zorro");
+
+        // THEN
+        assertThat(bookList.get(0).getIsbn()).isEqualTo("999");
+        assertThat(bookList.get(0).getTitle()).isEqualTo("Zorro");
+        assertThat(bookList.get(0).getAuthor()).isEqualTo(AuthorRepository.getAuthorDatabase().get("4"));
+    }
+
+    @Test
+    public void getBook_givenCompleteExistingTitle_thenReturnBook() {
+        // GIVEN
+        BookService bookService = new BookService();
+
+        // WHEN
+        List<Book> bookList = bookService.getBookTitle("Zorro");
+
+        // THEN
+        assertThat(bookList.get(0).getIsbn()).isEqualTo("999");
+        assertThat(bookList.get(0).getTitle()).isEqualTo("Zorro");
+        assertThat(bookList.get(0).getAuthor()).isEqualTo(AuthorRepository.getAuthorDatabase().get("4"));
     }
 
 //    @Test
