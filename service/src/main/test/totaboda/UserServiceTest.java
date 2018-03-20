@@ -47,6 +47,7 @@ class UserServiceTest {
     @Test
     public void getUser_happyPath(){
         Mockito.when(mockRepository.getUserById(0)).thenReturn(member1);
+        Mockito.when(mockRepository.assertThatUserExist(0)).thenReturn(true);
         Assertions.assertThat(userService.getUser(0)).isEqualTo(member1);
     }
 
@@ -73,9 +74,7 @@ class UserServiceTest {
     }
     @Test
     void addUser_happyPath() {
-        Mockito.when(mockRepository.addUser(member1)).thenReturn(null);
-        Assertions.assertThat(userService.getUser(0)).isEqualTo(member1);
-
+        Mockito.when(mockRepository.addUser(member1)).thenReturn(member1);
+        Assertions.assertThat(userService.addUser(member1)).isEqualTo(member1);
     }
-
 }
