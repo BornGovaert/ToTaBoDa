@@ -41,7 +41,7 @@ public class BookService {
         }
     }
 
-    public List<Book> getBookbyAuthor(Author author){
+    public List<Book> getBookByAuthor(Author author){
         try {
             return BookRepository.getBooksGivenAuthor(author);
         } catch (Exception e) {
