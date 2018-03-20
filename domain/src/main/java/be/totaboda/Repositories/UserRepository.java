@@ -21,7 +21,7 @@ public class UserRepository {
     }
 
     public LoggedInUser getUserById(int userId) {
-        if (!users.keySet().contains(userId)) {
+        if (!assertThatUserExist(userId)) {
             throw new IllegalArgumentException("No such user found.");
         }
         return users.get(userId);
@@ -39,7 +39,7 @@ public class UserRepository {
     }
 
     public void removeUser(int userId) {
-        if (!users.keySet().contains(userId)) {
+        if (!assertThatUserExist(userId)) {
             throw new IllegalArgumentException("No such user found.");
         } else {
             users.remove(userId);
@@ -47,13 +47,17 @@ public class UserRepository {
     }
 
     public LoggedInUser updateUser(int userID, LoggedInUser user) {
-        if (users.containsKey(userID)) {
+        if (assertThatUserExist(userID)) {
             user.setUserId(userID);
             users.put(userID, user);
         } else {
             throw new IllegalArgumentException("No such user found.");
         }
         return user;
+    }
+
+    public boolean assertThatUserExist(int userId){
+        return users.keySet().contains(userId);
     }
 
     public List<Member> getAllMembers() {
