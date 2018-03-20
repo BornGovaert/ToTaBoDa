@@ -1,9 +1,4 @@
-package be.totaboda.repositories;
-
-import be.totaboda.users.Employee;
-import be.totaboda.users.LoggedInUser;
-import be.totaboda.users.Member;
-import be.totaboda.users.Role;
+package be.totaboda.users;
 
 import javax.inject.Named;
 import java.util.*;

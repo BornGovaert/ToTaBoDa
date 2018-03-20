@@ -1,6 +1,6 @@
 package totaboda;
 
-import be.totaboda.repositories.UserRepository;
+import be.totaboda.users.UserRepository;
 import be.totaboda.users.Employee;
 import be.totaboda.users.LoggedInUser;
 import be.totaboda.users.Member;

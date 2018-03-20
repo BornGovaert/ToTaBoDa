@@ -1,4 +1,4 @@
-package be.totaboda.repositories;
+package be.totaboda.users;
 
 import be.totaboda.users.LoggedInUser;
 import be.totaboda.users.UserBuilder;

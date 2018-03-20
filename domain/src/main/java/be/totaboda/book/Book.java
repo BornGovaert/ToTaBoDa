@@ -1,5 +1,7 @@
 package be.totaboda.book;
 
+import be.totaboda.Author.Author;
+
 import java.util.Objects;
 
 public class Book {

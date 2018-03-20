@@ -1,4 +1,4 @@
-package be.totaboda.book;
+package be.totaboda.Author;
 
 import java.util.Objects;
 
