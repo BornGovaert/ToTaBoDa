@@ -44,11 +44,9 @@ public class BookRepository {
         List<Book> listOfBooks = new ArrayList<>();
 
         for (Book book : bookDatabase.values()) {
-            String test = book.getTitle();
-
             if (book.getTitle().equals(title)) {
                 listOfBooks.add(book);
-            } else if (test.contains(title)) {
+            } else if (book.getTitle().contains(title)) {
                 listOfBooks.add(book);
             }
         }
@@ -125,7 +123,7 @@ public class BookRepository {
 
     public static void deleteBook(String isbn) throws IllegalArgumentException {
         if (bookDatabase.containsKey(isbn)) {
-           // backupBookList.add(bookDatabase.get(isbn));
+            // backupBookList.add(bookDatabase.get(isbn));
             bookDatabase.remove(isbn);
         } else if (!(bookDatabase.containsKey(isbn))) {
             throw new IllegalArgumentException("Can't find a book with that isbn");
@@ -134,16 +132,22 @@ public class BookRepository {
     }
 
     public static void updateBook(Book book) {
-        for (Book bookInMap : bookDatabase.values()) {
-            if (bookInMap.getIsbn().equals(book.getIsbn())) {
-                bookDatabase.put(book.getIsbn(), book);
-            }
+        if (bookDatabase.containsKey(book.getIsbn())) {
+            bookDatabase.put(book.getIsbn(), book);
+        } else if (!(bookDatabase.containsKey(book.getIsbn())))
+
+        {
+            throw new IllegalArgumentException("Can't find a book with that isbn");
         }
-        for (Book bookInList : backupBookList) {
+        for (
+                Book bookInList : backupBookList)
+
+        {
             if (bookInList.getIsbn().equals(book.getIsbn())) {
                 backupBookList.set(backupBookList.indexOf(bookInList), book);
             }
         }
+
     }
 
     public static void restoreBook(Book book) {
