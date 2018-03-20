@@ -2,6 +2,7 @@ package totaboda;
 
 import be.totaboda.Book.Author;
 import be.totaboda.Book.Book;
+import be.totaboda.Repositories.AuthorRepository;
 import be.totaboda.Repositories.BookRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,33 +14,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class BookServiceTest {
 
-//    List<Book> testList = new ArrayList<>();
-//    Book book1 = new Book("007", "James Bond", new Author("78", "Ian", "Flemming"));
-//    Book book2 = new Book("072", "James Bond 2", new Author("78", "Ian", "Flemming"));
-//    Book book3 = new Book("5232ABF", "The History of PingPong", new Author("2", "John", "Smith"));
-//
-//    @Test
-//    void getBookISBN_thenMockCallingMethod(){
+    private BookRepository mockRepo;
+    private List<Book> testList;
+    private Book book1;
+    private Book book2;
+    private Book book3;
+
+    @BeforeEach
+    void setUp(){
+
+        //MOCKED CLASS
+        mockRepo = mock(BookRepository.class);
+
+        //DATA
+        testList = new ArrayList<>();
+
+        book1 = new Book("123", "Azkaban", AuthorRepository.getAuthorDatabase().get("1"));
+        book2 = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
+        book3 = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
+
 //        testList.add(book1);
 //        testList.add(book2);
 //        testList.add(book3);
-//
-//        BookService testService = new BookService();
-//        //BookRepository testRepo = Mockito.mock(BookRepository.class);
-//
-//        when(BookRepository.getBookInformationISBN("007")).thenReturn(testList);
-//
-//        Assertions.assertThat(testService.getBookISBN("007")).isEqualTo(testList);
-//       // verify(BookRepository.getBookInformationISBN("007"), times(1));
-//    }
-//
+    }
+
+
 //    @Test
-//    void getBookISBN_givenWrongISBN_thenMockIllegalArgumentException
+//    void getBookISBN_thenMockCallingMethod(){
+//        testList.add(book3);
+//        BookService testService = new BookService(mockRepo);
+//
+//        when(mockRepo.getBookInformationISBN("666")).thenReturn(testList);
+//
+//        //Assertions.assertThat(testService.getBookISBN("666")).isEqualTo(testList);
+//        verify(BookRepository.getBookInformationISBN("666"), times(1));
+//    }
 
 }
