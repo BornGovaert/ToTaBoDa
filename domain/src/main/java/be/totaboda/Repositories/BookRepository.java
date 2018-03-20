@@ -140,5 +140,20 @@ public class BookRepository {
                 bookDatabase.put(book.getIsbn(), book);
             }
         }
+        for (Book bookInList : backupBookList) {
+            if (bookInList.getIsbn().equals(book.getIsbn())) {
+                backupBookList.set(backupBookList.indexOf(bookInList), book);
+            }
+        }
     }
+
+    public static void restoreBook(Book book) {
+        for (Book bookInList : backupBookList) {
+            if (bookInList.getIsbn().equals(book.getIsbn())) {
+                bookDatabase.put(bookInList.getIsbn(), bookInList);
+
+            }
+        }
+    }
+
 }
