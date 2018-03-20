@@ -38,4 +38,26 @@ public class BookService {
             return bookList;
         }
     }
+
+    public List<Book> getBookbyAuthor(Author author){
+        try {
+            return BookRepository.getBooksGivenAuthor(author);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, e.getMessage());
+            List<Book> bookList = new ArrayList<>();
+            bookList.add(new Book("Unknown ISBN", "Unknown Title", new Author("Unknown id", "Unknown FirstName", "Unknown LastName")));
+            return bookList;
+        }
+    }
+
+    public List<Book> getBookGivenPartialAuthorName(String partialAuthorName){
+        try {
+            return BookRepository.getBookGivenPartialAuthor(partialAuthorName);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, e.getMessage());
+            List<Book> bookList = new ArrayList<>();
+            bookList.add(new Book("Unknown ISBN", "Unknown Title", new Author("Unknown id", "Unknown FirstName", "Unknown LastName")));
+            return bookList;
+        }
+    }
 }
