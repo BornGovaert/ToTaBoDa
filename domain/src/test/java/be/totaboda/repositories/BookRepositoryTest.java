@@ -1,8 +1,8 @@
 package be.totaboda.repositories;
 
 
-import be.totaboda.Author.Author;
-import be.totaboda.Author.AuthorRepository;
+import be.totaboda.author.Author;
+import be.totaboda.author.AuthorRepository;
 import be.totaboda.book.Book;
 import be.totaboda.book.BookRepository;
 import org.assertj.core.api.Assertions;

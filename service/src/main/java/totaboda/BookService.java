@@ -1,6 +1,6 @@
 package totaboda;
 
-import be.totaboda.Author.Author;
+import be.totaboda.author.Author;
 import be.totaboda.book.Book;
 import be.totaboda.book.BookRepository;
 

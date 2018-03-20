@@ -1,6 +1,6 @@
 package be.totaboda.book;
 
-import be.totaboda.Author.Author;
+import be.totaboda.author.Author;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package be.totaboda.Author;
+package be.totaboda.author;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
