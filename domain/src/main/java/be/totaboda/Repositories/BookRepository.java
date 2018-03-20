@@ -26,12 +26,15 @@ public class BookRepository {
 
     public static List<Book> getBookInformationISBN(String isbn) throws IllegalArgumentException {
         List<Book> listOfBooks = new ArrayList<>();
+
         for (Book book : bookDatabase.values()) {
+            String test = book.getIsbn();
+
             if (book.getIsbn().equals(isbn)) {
                 listOfBooks.add(bookDatabase.get(isbn));
-            } else if (isbn.matches("(.*)" + book.getIsbn() + "(.*)")) {
+            } else if (test.contains(isbn)) {
                 listOfBooks.add(book);
-            }
+            }//isbn.matches("[a-zA-Z0-9]*{" + test + "} +[a-zA-Z0-9]*")
         }
         if (listOfBooks.isEmpty()) {
             throw new IllegalArgumentException(String.format("No book found for isbn:%s", isbn));
@@ -41,10 +44,13 @@ public class BookRepository {
 
     public static List<Book> getBookInformationTitle(String title) throws IllegalArgumentException {
         List<Book> listOfBooks = new ArrayList<>();
+
         for (Book book : bookDatabase.values()) {
+            String test = book.getTitle();
+
             if (book.getTitle().equals(title)) {
-                listOfBooks.add(bookDatabase.get(title));
-            } else if (title.matches("(.*)" + book.getTitle() + "(.*)")) {
+                listOfBooks.add(book);
+            } else if (test.contains(title)) {
                 listOfBooks.add(book);
             }
         }
@@ -57,12 +63,12 @@ public class BookRepository {
     public static List<Book> getBooksGivenAuthor(Author author) throws IllegalArgumentException {
         List<Book> listOfBooks = new ArrayList<>();
         for (Book book : bookDatabase.values()) {
-            if (book.getAuthor() == author) {
+            if (book.getAuthor().equals(author)) {
                 listOfBooks.add(book);
             }
         }
         if (listOfBooks.isEmpty()) {
-            throw new IllegalArgumentException(String.format("No book found for title:%s", author));
+            throw new IllegalArgumentException(String.format("No books found for author:%s", author));
         }
 
         return listOfBooks;
@@ -74,25 +80,25 @@ public class BookRepository {
             if (author.contains(" ")) {
                 String[] parts = author.split(" ");
 
-                if (parts[1].matches("(.*)" + book.getAuthor().getFirstName() + "(.*)")) {
+                if (book.getAuthor().getFirstName().contains(parts[1])) {
                     listOfBooks.add(book);
-                } else if (parts[1].matches("(.*)" + book.getAuthor().getLastName() + "(.*)")) {
+                } else if (book.getAuthor().getLastName().contains(parts[1])) {
                     listOfBooks.add(book);
-                } else if (parts[2].matches("(.*)" + book.getAuthor().getFirstName() + "(.*)")) {
+                } else if (book.getAuthor().getFirstName().contains(parts[2])) {
                     listOfBooks.add(book);
-                } else if (parts[2].matches("(.*)" + book.getAuthor().getLastName() + "(.*)")) {
+                } else if (book.getAuthor().getLastName().contains(parts[2])) {
                     listOfBooks.add(book);
                 }
             } else {
-                if (author.matches("(.*)" + book.getAuthor().getFirstName() + "(.*)")) {
+                if (book.getAuthor().getFirstName().contains(author)) {
                     listOfBooks.add(book);
-                } else if (author.matches("(.*)" + book.getAuthor().getLastName() + "(.*)")) {
+                } else if (book.getAuthor().getLastName().contains(author)) {
                     listOfBooks.add(book);
                 }
             }
         }
         if (listOfBooks.isEmpty()) {
-            throw new IllegalArgumentException(String.format("No book found for title:%s", author));
+            throw new IllegalArgumentException(String.format("No books found for author:%s", author));
         }
         return listOfBooks;
     }
