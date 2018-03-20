@@ -1,7 +1,7 @@
 package totaboda;
 
 import be.totaboda.Repositories.UserRepository;
-import be.totaboda.Users.LoggedInUser;
+import be.totaboda.Users.Member;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,22 +16,22 @@ public class UserService {
         UserService.userRepository = userRepository;
     }
 
-    public LoggedInUser getUser(int userID) {
+    public Member getUser(int userID) {
         return null;
     }
 
     public void removeUser(int userID) {
     }
 
-    public LoggedInUser addUser(LoggedInUser user) {
+    public Member addUser(Member user) {
         return null;
     }
 
-    public List<LoggedInUser> getAllUsers() {
+    public List<Member> getAllUsers() {
         return null;
     }
 
-    public LoggedInUser updateUser(int userID, LoggedInUser user) {
+    public Member updateUser(int userID, Member user) {
         return null;
     }
 

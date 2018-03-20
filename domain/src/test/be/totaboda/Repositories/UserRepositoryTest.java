@@ -1,31 +1,28 @@
 package be.totaboda.Repositories;
 
-import be.totaboda.Users.LoggedInUser;
-import org.assertj.core.api.Assert;
+import be.totaboda.Users.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class UserRepositoryTest {
     private UserData mock;
     private UserRepository testRepository;
-    private LoggedInUser user1;
-    private LoggedInUser user2;
+    private Member user1;
+    private Member user2;
+    private Employee employee1, employee2;
 
     @BeforeEach
     public void setUp() {
 
         mock = Mockito.mock(UserData.class);
-        user1 = LoggedInUser.UserBuilder.buildUser()
+        user1 = UserBuilder.buildUser()
                 .withFirstName("T")
                 .withLastName("L")
                 .withEMail("t@t.be")
@@ -34,9 +31,9 @@ class UserRepositoryTest {
                 .withPostalCode("1")
                 .withCity("c")
                 .withInss("4")
-                .build();
+                .buildMember();
 
-        user2 = LoggedInUser.UserBuilder.buildUser()
+        user2 = UserBuilder.buildUser()
                 .withFirstName("L")
                 .withLastName("T")
                 .withEMail("t@l.be")
@@ -45,7 +42,19 @@ class UserRepositoryTest {
                 .withPostalCode("1")
                 .withCity("c")
                 .withInss("3")
-                .build();
+                .buildMember();
+        employee1 = UserBuilder.buildUser()
+                .withFirstName("John")
+                .withLastName("Constantine")
+                .withRole(Role.ROLE_ADMIN)
+                .withEMail("john.constantine@hell.com")
+                .buildEmployee();
+        employee2 = UserBuilder.buildUser()
+                .withFirstName("Clark")
+                .withLastName("Kent")
+                .withRole(Role.ROLE_LIBRARIAN)
+                .withEMail("Clark.kent@do.it")
+                .buildEmployee();
     }
 
     @AfterEach
@@ -135,6 +144,18 @@ class UserRepositoryTest {
         testRepository = new UserRepository(mock);
         testRepository.addUser(user2);
         Assertions.assertThat(testRepository.getAllUsers()).containsExactly(user1, user2);
+    }
+    @Test
+    public void getAllMembers_returnsListOfMembers () {
+        Mockito.when(mock.getDefaultUsers()).thenReturn(Arrays.asList(user1, user2, employee1, employee2));
+        testRepository = new UserRepository(mock);
+        Assertions.assertThat(testRepository.getAllMembers()).containsExactly(user1, user2);
+    }
 
+    @Test
+    public void getAllEmployees_returnsListOfEmployees () {
+        Mockito.when(mock.getDefaultUsers()).thenReturn(Arrays.asList(user1, user2, employee1, employee2));
+        testRepository = new UserRepository(mock);
+        Assertions.assertThat(testRepository.getAllEmployees()).containsExactly(employee1, employee2);
     }
 }

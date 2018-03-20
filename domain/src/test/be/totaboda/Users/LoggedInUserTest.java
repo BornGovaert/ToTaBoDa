@@ -10,7 +10,7 @@ class LoggedInUserTest {
 
     @Test
     public void createALoggedInUser_HappyPath(){
-        LoggedInUser testUser = LoggedInUser.UserBuilder.buildUser().withFirstName("T")
+        Member testUser = UserBuilder.buildUser().withFirstName("T")
                 .withLastName("L")
                 .withStreetName("s")
                 .withStreetNumber("5")
@@ -18,7 +18,7 @@ class LoggedInUserTest {
                 .withCity("City")
                 .withEMail("a@a.com")
                 .withInss("1234")
-                .build();
+                .buildMember();
 
         assertThat(testUser.getFirstName()).isEqualTo("T");
         assertThat(testUser.getLastName()).isEqualTo("L");
@@ -32,7 +32,7 @@ class LoggedInUserTest {
     @Test
     public void createALoggedInUser_whenEmailIsNotAValidEmailAdress_throwsException(){
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(()->LoggedInUser.UserBuilder.buildUser().withFirstName("T")
+                .isThrownBy(()-> UserBuilder.buildUser().withFirstName("T")
                 .withLastName("L")
                 .withStreetName("s")
                 .withStreetNumber("5")
@@ -40,25 +40,20 @@ class LoggedInUserTest {
                 .withCity("City")
                 .withEMail("e")
                 .withInss("1234")
-                .build()).withMessage("Please provide a valid e-mail address.\nCorrect Format: \"xx@xx.xx\"");
+                .buildMember()).withMessage("Please provide a valid e-mail address.\nCorrect Format: \"xx@xx.xx\"");
 
 
     }
     @Test
     public void createALoggedInUser_whenloggedInUserIsNotCreatedWithAllTheArguments_throwsException(){
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(()->LoggedInUser.UserBuilder.buildUser().withFirstName("T")
+                .isThrownBy(()-> UserBuilder.buildUser().withFirstName("T")
                 .withLastName("L")
                 .withStreetName("s")
                 .withStreetNumber("5")
                 .withPostalCode("1234")
                 .withCity("City")
                 .withInss("1234")
-                .build()).withMessage("Please provide all the necessary arguments.");
-
+                .buildMember()).withMessage("Please provide all the necessary arguments.");
     }
-    
-
-
-
 }
