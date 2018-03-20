@@ -49,7 +49,7 @@ public class UserService {
         return userRepository.getAllEmployees();
     }
 
-    public LoggedInUser updateUser(int userID, Member user) throws UnknownResourceException {
+    public LoggedInUser updateUser(int userID, LoggedInUser user) throws UnknownResourceException {
         if(userRepository.assertThatUserExist(userID)){
             return userRepository.updateUser(userID,user);
         }
