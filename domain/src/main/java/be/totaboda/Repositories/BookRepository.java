@@ -13,8 +13,6 @@ import java.util.regex.Matcher;
 public class BookRepository {
 
     private AuthorRepository authorRepository = new AuthorRepository();
-
-
     private static HashMap<String, Book> bookDatabase =
             Maps.newHashMap(
                     new ImmutableMap.Builder<String, Book>()
@@ -104,19 +102,42 @@ public class BookRepository {
     }
 
     public static List<Book> getBooks() {
-        return new ArrayList<Book>(bookDatabase.values());
+        return new ArrayList<>(bookDatabase.values());
     }
 
-    public static Book createBook(String isbn, Book book) {
-        return bookDatabase.put("", book);
+    public static Book createBook(String isbn, String title, String lastName) {
+        ArrayList<Author> authorList = new ArrayList<>();
+        for (Author author : AuthorRepository.getAuthorDatabase().values()) {
+            if (author.getLastName().equals(lastName)) {
+                authorList.add(author);
+            }
+        }
+        if (authorList.size() > 1) {
+            throw new IllegalArgumentException("More then one author found with that last name");
+        } else if (authorList.size() == 0) {
+            throw new IllegalArgumentException("Author doesn't exist, create author first");
+        } else {
+            return bookDatabase.put(isbn, new Book(isbn, title, authorList.get(0)));
+        }
     }
+
+    private static ArrayList<Book> backupBookList = new ArrayList<>();
 
     public static void deleteBook(String isbn) throws IllegalArgumentException {
         for (Book book : bookDatabase.values()) {
             if (book.getIsbn().equals(isbn)) {
+                backupBookList.add(book);
                 bookDatabase.remove(isbn);
             } else {
                 throw new IllegalArgumentException(String.format("No book found for isbn:%s", isbn));
+            }
+        }
+    }
+
+    public static void updateBook(Book book) {
+        for (Book bookInMap : bookDatabase.values()) {
+            if (bookInMap.getIsbn().equals(book.getIsbn())) {
+                bookDatabase.put(book.getIsbn(), book);
             }
         }
     }
