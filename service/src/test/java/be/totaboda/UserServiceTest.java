@@ -1,4 +1,4 @@
-package totaboda;
+package be.totaboda;
 
 import be.totaboda.repositories.UserData;
 import be.totaboda.repositories.UserRepository;
@@ -7,6 +7,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import totaboda.UserService;
 import totaboda.exceptions.UnknownResourceException;
 
 import java.util.Arrays;
