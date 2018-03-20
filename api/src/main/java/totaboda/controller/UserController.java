@@ -22,14 +22,14 @@ public class UserController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public UserDto createMember (@RequestBody UserDto member) {
         Member newMember = (Member) userService.addUser(userMapper.toMember(member));
         return userMapper.memberToDto(newMember);
     }
-    @GetMapping(path = "/{memberID}", produces = "application/json")
+    @GetMapping(path = "/members/{memberId}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto getMember(@PathVariable int memberID) {
-        return userMapper.memberToDto((Member) userService.getUser(memberID));
+    public UserDto getMember(@PathVariable int memberId) {
+        return userMapper.memberToDto((Member) userService.getUser(memberId));
     }
 }

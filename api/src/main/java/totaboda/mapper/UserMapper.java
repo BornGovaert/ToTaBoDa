@@ -5,6 +5,9 @@ import be.totaboda.users.Member;
 import be.totaboda.users.UserBuilder;
 import totaboda.dtos.UserDto;
 
+import javax.inject.Named;
+
+@Named
 public class UserMapper {
 
     public LoggedInUser toMember(UserDto userDto) {
