@@ -1,6 +1,7 @@
 package totaboda;
 
 import be.totaboda.Repositories.UserRepository;
+import be.totaboda.Users.Employee;
 import be.totaboda.Users.LoggedInUser;
 import be.totaboda.Users.Member;
 import totaboda.Exceptions.UnknownResourceException;
@@ -37,7 +38,7 @@ public class UserService {
         return null;
     }
 
-    public List<Member> getAllEmployees() {
+    public List<Employee> getAllEmployees() {
         return null;
     }
 

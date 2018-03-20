@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Named
-class UserData {
+public class UserData {
 
     public List<LoggedInUser> getDefaultUsers() {
         return Arrays.asList(UserBuilder.buildUser()
