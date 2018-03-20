@@ -32,7 +32,7 @@ public class BookRepositoryTest {
         List<Book> actualBooks = BookRepository.getBookInformationISBN("1");
 
         Assertions.assertThat(actualBooks)
-                .contains(expectedBook1, expectedBook2)
+                .containsExactlyInAnyOrder(expectedBook1, expectedBook2)
                 .doesNotContain(notExpectedBook);
     }
 
@@ -60,10 +60,10 @@ public class BookRepositoryTest {
         Book expectedBook2 = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
         Book notExpectedBook = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
 
-        List<Book> actualBooks = BookRepository.getBookInformationISBN("n");
+        List<Book> actualBooks = BookRepository.getBookInformationTitle("n");
 
         Assertions.assertThat(actualBooks)
-                .contains(expectedBook1, expectedBook2)
+                .containsExactlyInAnyOrder(expectedBook1, expectedBook2)
                 .doesNotContain(notExpectedBook);
     }
 
@@ -85,7 +85,7 @@ public class BookRepositoryTest {
         List<Book> actualBooks = BookRepository.getBooksGivenAuthor(author);
 
         Assertions.assertThat(actualBooks)
-                .contains(expectedBook)
+                .containsExactlyInAnyOrder(expectedBook)
                 .doesNotContain(notExpectedBook);
     }
 
@@ -95,7 +95,7 @@ public class BookRepositoryTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 BookRepository.getBooksGivenAuthor(author));
 
-        assertEquals(exception.getMessage(), "No books found for author:");
+        assertEquals(exception.getMessage(), "No books found for author:"+ author);
     }
 
     @Test
@@ -107,7 +107,7 @@ public class BookRepositoryTest {
         List<Book> actualBooks = BookRepository.getBookGivenPartialAuthor("n");
 
         Assertions.assertThat(actualBooks)
-                .contains(expectedBook1, expectedBook2)
+                .containsExactlyInAnyOrder(expectedBook1, expectedBook2)
                 .doesNotContain(notExpectedBook);
     }
 
