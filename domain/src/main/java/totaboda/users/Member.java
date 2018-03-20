@@ -1,4 +1,4 @@
-package be.totaboda.users;
+package totaboda.users;
 
 public class Member implements LoggedInUser{
     private String Inss, lastName, firstName, eMail, streetName, streetNumber, postalCode, city;

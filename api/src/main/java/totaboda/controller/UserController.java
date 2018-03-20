@@ -1,6 +1,6 @@
 package totaboda.controller;
 
-import be.totaboda.users.Member;
+import totaboda.users.Member;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import totaboda.UserService;

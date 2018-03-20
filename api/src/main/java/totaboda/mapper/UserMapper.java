@@ -1,8 +1,8 @@
 package totaboda.mapper;
 
-import be.totaboda.users.LoggedInUser;
-import be.totaboda.users.Member;
-import be.totaboda.users.UserBuilder;
+import totaboda.users.LoggedInUser;
+import totaboda.users.Member;
+import totaboda.users.UserBuilder;
 import totaboda.dtos.UserDto;
 
 import javax.inject.Named;

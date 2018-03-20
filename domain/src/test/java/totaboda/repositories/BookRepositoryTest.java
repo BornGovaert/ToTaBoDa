@@ -1,10 +1,10 @@
-package be.totaboda.repositories;
+package totaboda.repositories;
 
 
-import be.totaboda.author.Author;
-import be.totaboda.author.AuthorRepository;
-import be.totaboda.book.Book;
-import be.totaboda.book.BookRepository;
+import totaboda.author.Author;
+import totaboda.author.AuthorRepository;
+import totaboda.book.Book;
+import totaboda.book.BookRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

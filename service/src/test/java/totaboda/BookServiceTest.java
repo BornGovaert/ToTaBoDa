@@ -1,7 +1,7 @@
-package be.totaboda;
+package totaboda;
 
-import be.totaboda.author.AuthorRepository;
-import be.totaboda.book.Book;
+import totaboda.author.AuthorRepository;
+import totaboda.book.Book;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import totaboda.BookService;

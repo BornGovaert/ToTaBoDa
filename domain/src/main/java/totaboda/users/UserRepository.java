@@ -1,4 +1,4 @@
-package be.totaboda.users;
+package totaboda.users;
 
 import javax.inject.Inject;
 import javax.inject.Named;

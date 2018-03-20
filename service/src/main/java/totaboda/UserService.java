@@ -1,9 +1,9 @@
 package totaboda;
 
-import be.totaboda.users.UserRepository;
-import be.totaboda.users.Employee;
-import be.totaboda.users.LoggedInUser;
-import be.totaboda.users.Member;
+import totaboda.users.UserRepository;
+import totaboda.users.Employee;
+import totaboda.users.LoggedInUser;
+import totaboda.users.Member;
 import totaboda.exceptions.UnknownResourceException;
 
 import javax.inject.Inject;
