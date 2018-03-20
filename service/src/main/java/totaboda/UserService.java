@@ -20,30 +20,40 @@ public class UserService {
     }
 
     public LoggedInUser getUser(int userID) throws UnknownResourceException {
-        return null;
+        if(userRepository.assertThatUserExist(userID)){
+         return userRepository.getUserById(userID);
+        }
+        throw new UnknownResourceException("User","User ID: "+ userID);
     }
 
     public void removeUser(int userID) throws UnknownResourceException {
+        if(userRepository.assertThatUserExist(userID)){
+            userRepository.removeUser(userID);
+        }
+        else throw new UnknownResourceException("User","User ID: "+ userID);
     }
 
     public LoggedInUser addUser(LoggedInUser user) {
-        return null;
+        return userRepository.addUser(user);
     }
 
     public List<LoggedInUser> getAllUsers() {
-        return null;
+        return userRepository.getAllUsers();
     }
 
     public List<Member> getAllMembers() {
-        return null;
+        return userRepository.getAllMembers();
     }
 
     public List<Employee> getAllEmployees() {
-        return null;
+        return userRepository.getAllEmployees();
     }
 
     public LoggedInUser updateUser(int userID, Member user) throws UnknownResourceException {
-        return null;
+        if(userRepository.assertThatUserExist(userID)){
+            return userRepository.updateUser(userID,user);
+        }
+        throw new UnknownResourceException("User","User ID: "+ userID);
     }
 
 }
