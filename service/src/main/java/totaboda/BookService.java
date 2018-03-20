@@ -19,12 +19,12 @@ public class BookService {
     }
 
     public List<Book> getBooks() {
-        return BookRepository.getBooks();
+        return bookRepo.getBooks();
     }
 
     public List<Book> getBookISBN(String isbn) {
         try {
-            return BookRepository.getBookInformationISBN(isbn);
+            return bookRepo.getBookInformationISBN(isbn);
         } catch (IllegalArgumentException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
             List<Book> bookList = new ArrayList<>();
@@ -35,11 +35,33 @@ public class BookService {
 
     public List<Book> getbookTitle(String title){
         try {
-            return BookRepository.getBookInformationTitle(title);
+            return bookRepo.getBookInformationTitle(title);
         } catch (IllegalArgumentException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
             List<Book> bookList = new ArrayList<>();
             bookList.add(new Book("Unknown ISBN", title, new Author("Unknown id", "Unknown FirstName", "Unknown LastName")));
+            return bookList;
+        }
+    }
+
+    public List<Book> getBookbyAuthor(Author author){
+        try {
+            return bookRepo.getBooksGivenAuthor(author);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, e.getMessage());
+            List<Book> bookList = new ArrayList<>();
+            bookList.add(new Book("Unknown ISBN", "Unknown Title", new Author("Unknown id", "Unknown FirstName", "Unknown LastName")));
+            return bookList;
+        }
+    }
+
+    public List<Book> getBookGivenPartialAuthorName(String partialAuthorName){
+        try {
+            return bookRepo.getBookGivenPartialAuthor(partialAuthorName);
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, e.getMessage());
+            List<Book> bookList = new ArrayList<>();
+            bookList.add(new Book("Unknown ISBN", "Unknown Title", new Author("Unknown id", "Unknown FirstName", "Unknown LastName")));
             return bookList;
         }
     }
