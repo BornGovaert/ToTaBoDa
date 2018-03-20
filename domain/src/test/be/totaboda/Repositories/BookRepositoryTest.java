@@ -4,7 +4,6 @@ package be.totaboda.Repositories;
 import be.totaboda.Book.Author;
 import be.totaboda.Book.Book;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -178,8 +177,8 @@ public class BookRepositoryTest {
                 .doesNotContain(bookOldInfo);
     }
 
-    @Test
-    void updateBook_throwsException(){
-        Assertions.fail("");
-    }
+//    @Test
+//    void updateBook_throwsException(){
+//        Assertions.fail("");
+//    }
 }
