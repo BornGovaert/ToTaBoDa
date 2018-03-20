@@ -30,7 +30,7 @@ public class BookService {
         }
     }
 
-    public List<Book> getbookTitle(String title){
+    public List<Book> getBookTitle(String title){
         try {
             return BookRepository.getBookInformationTitle(title);
         } catch (IllegalArgumentException e) {
