@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class LoggedInUser {
     private String Inss, lastName, firstName, eMail, streetName, streetNumber, postalCode, city;
     private int userId;
+    private Role role;
 
     private LoggedInUser(UserBuilder userBuilder) {
         this.firstName = userBuilder.firstName;
@@ -16,7 +17,6 @@ public class LoggedInUser {
         this.streetNumber = userBuilder.streetNumber;
         this.postalCode = userBuilder.postalCode;
         this.city = userBuilder.city;
-
     }
 
     public void setUserId(int userId) {
