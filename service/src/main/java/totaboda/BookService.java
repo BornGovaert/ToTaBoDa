@@ -11,7 +11,12 @@ import java.util.logging.Logger;
 
 public class BookService {
 
+    private BookRepository bookRepo;
     private final static Logger LOGGER = Logger.getLogger(BookService.class.getName());
+
+    public BookService(BookRepository bookRepo) {
+        this.bookRepo = bookRepo;
+    }
 
     public List<Book> getBooks() {
         return BookRepository.getBooks();
