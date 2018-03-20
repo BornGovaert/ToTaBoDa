@@ -14,7 +14,7 @@ import static org.mockito.Mockito.*;
 public class BookServiceTest {
 
     @Test
-    public void getBook_givenCompleteExistingIsbnNumber_thenReturnBook() {
+    public void getBookISBN_givenCompleteExistingIsbnNumber_thenReturnBook() {
         // GIVEN
         BookService bookService = new BookService();
 
@@ -27,33 +27,51 @@ public class BookServiceTest {
         assertThat(bookList.get(0).getAuthor()).isEqualTo(AuthorRepository.getAuthorDatabase().get("4"));
     }
 
-    @Test
-    public void getStock_givenAUnknownBookIsbn_thenReturnBookWithUnknownNameAndNoPrice() {
-        // GIVEN
-        BookService bookService = new BookService();
 
-        // WHEN
-        List<Book> actualBookList = bookService.getBookISBN("XXX");
-
-        // THEN
-        assertThat(actualBookList.get(0).getIsbn()).isEqualTo("XXX");
-        assertThat(actualBookList.get(0).getTitle()).isEqualTo("Unknown book");
-        assertThat(actualBookList.get(0).getAuthor()).isNull();
-    }
-
+    //GIVEN UNKNOWN ISBN
 //    @Test
-//    public void getBook_givenCompleteExistingIsbnNumber_thenReturnBook() {
+//    public void getBookISBN_givenAUnknownBookIsbn_thenReturnBookWithUnknownNameAndNoPrice() {
 //        // GIVEN
 //        BookService bookService = new BookService();
 //
 //        // WHEN
-//        List<Book> bookList = bookService.getBookInformationISBN("999");
+//        List<Book> actualBookList = bookService.getBookISBN("XXX");
 //
 //        // THEN
-//        assertThat(bookList.get(0).getIsbn()).isEqualTo("999");
-//        assertThat(bookList.get(0).getTitle()).isEqualTo("Zorro");
-//        assertThat(bookList.get(0).getAuthor()).isEqualTo(AuthorRepository.getAuthorDatabase().get("4"));
+//        assertThat(actualBookList.get(0).getIsbn()).isEqualTo("XXX");
+//        assertThat(actualBookList.get(0).getTitle()).isEqualTo("Unknown book");
+//        assertThat(actualBookList.get(0).getAuthor()).isNull();
 //    }
+
+    @Test
+    public void getBookTitle_givenCompleteExistingTitle_thenReturnBook() {
+        // GIVEN
+        BookService bookService = new BookService();
+
+        // WHEN
+        List<Book> bookList = bookService.getbookTitle("Zorro");
+
+        // THEN
+        assertThat(bookList.get(0).getIsbn()).isEqualTo("999");
+        assertThat(bookList.get(0).getTitle()).isEqualTo("Zorro");
+        assertThat(bookList.get(0).getAuthor()).isEqualTo(AuthorRepository.getAuthorDatabase().get("4"));
+    }
+    @Test
+    public void getBookByAuthor_givenAuthor_thenReturnBook() {
+        // GIVEN
+        BookService bookService = new BookService();
+
+        // WHEN
+        List<Book> bookList = bookService.getBookByAuthor(AuthorRepository.getAuthorDatabase().get("4"));
+
+        // THEN
+        assertThat(bookList.get(0).getIsbn()).isEqualTo("999");
+        assertThat(bookList.get(0).getTitle()).isEqualTo("Zorro");
+        assertThat(bookList.get(0).getAuthor()).isEqualTo(AuthorRepository.getAuthorDatabase().get("4"));
+    }
+
+
+
 }
 
 //
