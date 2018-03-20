@@ -119,4 +119,55 @@ public class BookRepositoryTest {
 
         assertEquals(exception.getMessage(), "No books found for author:sdjfjkskdf");
     }
+
+    @Test
+    void createBook_happyPath(){
+        Book bookToAdd = new Book("testBook", "Serious Book Title", AuthorRepository.getAuthorDatabase().get("1"));
+
+        BookRepository newBookRepo = new BookRepository();
+        newBookRepo.createBook("testBook", bookToAdd);
+
+        Assertions.assertThat(newBookRepo.getBooks()).contains(bookToAdd);
+    }
+
+    @Test
+    void createBook_throwsException(){
+        Book bookToAdd = new Book("testBook", "Serious Book Title", new Author("64", "Louis", "Armstrong"));
+
+        BookRepository newBookRepo = new BookRepository();
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
+                -> newBookRepo.createBook("testBook", bookToAdd));
+    }
+
+    @Test
+    void deleteBook_happyPath(){
+        Book bookToDelete = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
+
+        BookRepository newBookRepo = new BookRepository();
+        BookRepository.deleteBook("111");
+
+        Assertions.assertThat(newBookRepo.getBooks()).doesNotContain(bookToDelete);
+    }
+
+    @Test
+    void deleteBook_throwsException(){
+        Book bookToDelete = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
+
+        BookRepository newBookRepo = new BookRepository();
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
+                -> newBookRepo.deleteBook("111"));
+
+    }
+
+    @Test
+    void updateBook_happyPath(){
+        Assertions.fail("");
+    }
+
+    @Test
+    void updateBook_throwsException(){
+        Assertions.fail("");
+    }
 }
