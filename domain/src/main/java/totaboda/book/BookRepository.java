@@ -1,7 +1,7 @@
-package be.totaboda.book;
+package totaboda.book;
 
-import be.totaboda.author.Author;
-import be.totaboda.author.AuthorRepository;
+import totaboda.author.Author;
+import totaboda.author.AuthorRepository;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 

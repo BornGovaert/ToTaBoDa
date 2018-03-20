@@ -1,4 +1,4 @@
-package be.totaboda.users;
+package totaboda.users;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package be.totaboda.users;
+package totaboda.users;
 
 public enum Role {
     ROLE_MEMBER,

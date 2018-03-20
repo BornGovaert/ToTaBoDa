@@ -1,6 +1,6 @@
 package totaboda.dtos;
 
-import be.totaboda.users.Role;
+import totaboda.users.Role;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

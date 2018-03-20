@@ -1,4 +1,4 @@
-package be.totaboda.users;
+package totaboda.users;
 
 public interface LoggedInUser {
     public void setUserId(int userId);

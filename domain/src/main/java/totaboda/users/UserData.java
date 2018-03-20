@@ -1,7 +1,7 @@
-package be.totaboda.users;
+package totaboda.users;
 
-import be.totaboda.users.LoggedInUser;
-import be.totaboda.users.UserBuilder;
+import totaboda.users.LoggedInUser;
+import totaboda.users.UserBuilder;
 
 import javax.inject.Named;
 import java.util.Arrays;

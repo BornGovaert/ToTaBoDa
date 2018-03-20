@@ -1,8 +1,8 @@
 package totaboda;
 
-import be.totaboda.author.Author;
-import be.totaboda.book.Book;
-import be.totaboda.book.BookRepository;
+import totaboda.author.Author;
+import totaboda.book.Book;
+import totaboda.book.BookRepository;
 
 import javax.inject.Named;
 import java.util.ArrayList;

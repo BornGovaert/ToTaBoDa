@@ -1,6 +1,6 @@
-package be.totaboda;
+package totaboda;
 
-import be.totaboda.users.*;
+import totaboda.users.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

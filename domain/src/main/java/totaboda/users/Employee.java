@@ -1,4 +1,4 @@
-package be.totaboda.users;
+package totaboda.users;
 
 public class Employee implements LoggedInUser{
     private String lastName, firstName, eMail;

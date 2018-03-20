@@ -1,4 +1,4 @@
-package be.totaboda.users;
+package totaboda.users;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,6 +1,6 @@
 package totaboda.mapper;
 
-import be.totaboda.book.Book;
+import totaboda.book.Book;
 import totaboda.dtos.BookDto;
 
 public class BookMapper {
