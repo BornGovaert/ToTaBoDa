@@ -2,10 +2,7 @@ package totaboda.controller;
 
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import totaboda.BookService;
 import totaboda.book.Book;
 import totaboda.dtos.BookDto;
@@ -38,9 +35,9 @@ public class BookController {
         return booksDto;
     }
 
-    @GetMapping(path = "/{isbn}", produces = "application/json")
+    @GetMapping(path = "/isbn:{isbn}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public List<BookDto> getBookByIsbn(String isbn){
+    public List<BookDto> getBooksByIsbn(@PathVariable String isbn){
         ArrayList<BookDto> booksByIsbn = new ArrayList<>();
         List<Book> booksFoundMatchingIsbn = bookService.getBookISBN(isbn);
         for(Book book : booksFoundMatchingIsbn){
