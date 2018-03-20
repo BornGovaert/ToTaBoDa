@@ -2,8 +2,8 @@ package be.totaboda;
 
 import be.totaboda.author.AuthorRepository;
 import be.totaboda.book.Book;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import totaboda.BookService;
 import java.util.ArrayList;
 import java.util.List;
