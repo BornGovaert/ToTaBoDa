@@ -1,13 +1,9 @@
 package totaboda;
 
-import totaboda.author.Author;
 import totaboda.author.AuthorRepository;
 import totaboda.book.Book;
-import totaboda.book.BookRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import totaboda.BookService;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,73 +13,101 @@ import static org.mockito.Mockito.*;
 
 public class BookServiceTest {
 
-    private BookService bookService;
-    private BookRepository mockRepository;
-    private List<Book> testList;
-    private Book book1;
-    private Book book2;
-    private Book book3;
+    @Test
+    public void getBookISBN_givenCompleteExistingIsbnNumber_thenReturnBook() {
+        // GIVEN
+        BookService bookService = new BookService();
 
-    @BeforeEach
-    void setUp() {
+        // WHEN
+        List<Book> bookList = bookService.getBookISBN("999");
 
-        //MOCKED CLASS
-        mockRepository = Mockito.mock(BookRepository.class);
-
-        //DATA
-        testList = new ArrayList<>();
-
-        book1 = new Book("123", "Azkaban", AuthorRepository.getAuthorDatabase().get("1"));
-        book2 = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
-        book3 = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
-
-        testList.add(book1);
-        testList.add(book2);
-        testList.add(book3);
+        // THEN
+        assertThat(bookList.get(0).getIsbn()).isEqualTo("999");
+        assertThat(bookList.get(0).getTitle()).isEqualTo("Zorro");
+        assertThat(bookList.get(0).getAuthor()).isEqualTo(AuthorRepository.getAuthorDatabase().get("4"));
     }
 
-       //@Test
-        //    public void getUser_happyPath() {
-        //        Mockito.when(mockRepository.getUserById(0)).thenReturn(member1);
-        //        Mockito.when(mockRepository.assertThatUserExist(0)).thenReturn(true);
-        //        Assertions.assertThat(userService.getUser(0)).isEqualTo(member1);
-        //    }
 
-
-
-        @Test
-        public void getBookISBN_happyPath() {
-            List<Book> returns = new ArrayList<>();
-            returns.add(book2);
-            Mockito.when(mockRepository.getBookInformationISBN("111")).thenReturn(returns);
-            Assertions.assertThat(bookService.getBookISBN("111")).isEqualTo(returns);
-        }
-
+    //GIVEN UNKNOWN ISBN
+//    @Test
+//    public void getBookISBN_givenAUnknownBookIsbn_thenReturnBookWithUnknownNameAndNoPrice() {
+//        // GIVEN
+//        BookService bookService = new BookService();
+//
+//        // WHEN
+//        List<Book> actualBookList = bookService.getBookISBN("XXX");
+//
+//        // THEN
+//        assertThat(actualBookList.get(0).getIsbn()).isEqualTo("XXX");
+//        assertThat(actualBookList.get(0).getTitle()).isEqualTo("Unknown book");
+//        assertThat(actualBookList.get(0).getAuthor()).isNull();
+//    }
 
     @Test
-    public void getBookTitle_happyPath() {
-        List<Book> returns = new ArrayList<>();
-        returns.add(book2);
-        Mockito.when(mockRepository.getBookInformationTitle("Zorro")).thenReturn(returns);
-        Assertions.assertThat(bookService.getbookTitle("Zorro")).isEqualTo(returns);
-    }
+    public void getBookTitle_givenCompleteExistingTitle_thenReturnBook() {
+        // GIVEN
+        BookService bookService = new BookService();
 
+        // WHEN
+        List<Book> bookList = bookService.getbookTitle("Zorro");
+
+        // THEN
+        assertThat(bookList.get(0).getIsbn()).isEqualTo("999");
+        assertThat(bookList.get(0).getTitle()).isEqualTo("Zorro");
+        assertThat(bookList.get(0).getAuthor()).isEqualTo(AuthorRepository.getAuthorDatabase().get("4"));
+    }
     @Test
-    public void getBookByAuthor_happyPath() {
-        List<Book> returns = new ArrayList<>();
-        returns.add(book3);
-        Mockito.when(mockRepository.getBooksGivenAuthor(new Author("3","Willem", "Elsschot"))).thenReturn(returns);
-        Assertions.assertThat(bookService.getBookByAuthor(new Author("3","Willem", "Elsschot"))).isEqualTo(returns);
+    public void getBookByAuthor_givenAuthor_thenReturnBook() {
+        // GIVEN
+        BookService bookService = new BookService();
+
+        // WHEN
+        List<Book> bookList = bookService.getBookbyAuthor(AuthorRepository.getAuthorDatabase().get("4"));
+
+        // THEN
+        assertThat(bookList.get(0).getIsbn()).isEqualTo("999");
+        assertThat(bookList.get(0).getTitle()).isEqualTo("Zorro");
+        assertThat(bookList.get(0).getAuthor()).isEqualTo(AuthorRepository.getAuthorDatabase().get("4"));
     }
 
 
 
-//            testList.add(book3);
-//            BookService testService = new BookService(mockRepo);
+}
+
 //
-//            when(mockRepo.getBookInformationISBN("666")).thenReturn(testList);
+//    private BookRepository mockRepo;
+//    private List<Book> testList;
+//    private Book book1;
+//    private Book book2;
+//    private Book book3;
 //
-//            //Assertions.assertThat(testService.getBookISBN("666")).isEqualTo(testList);
-//            verify(BookRepository.getBookInformationISBN("666"), times(1));
-//        }
-    }
+//    @BeforeEach
+//    void setUp(){
+//
+//        //MOCKED CLASS
+//        mockRepo = mock(BookRepository.class);
+//
+//        //DATA
+//        testList = new ArrayList<>();
+//
+//        book1 = new Book("123", "Azkaban", AuthorRepository.getAuthorDatabase().get("1"));
+//        book2 = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
+//        book3 = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
+
+//        testList.add(book1);
+//        testList.add(book2);
+//        testList.add(book3);
+
+
+
+//    @Test
+//    void getBookISBN_thenMockCallingMethod(){
+//        testList.add(book3);
+//        BookService testService = new BookService(mockRepo);
+//
+//        when(mockRepo.getBookInformationISBN("666")).thenReturn(testList);
+//
+//        //Assertions.assertThat(testService.getBookISBN("666")).isEqualTo(testList);
+//        verify(BookRepository.getBookInformationISBN("666"), times(1));
+//    }
+
