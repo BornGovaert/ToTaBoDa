@@ -62,7 +62,7 @@ public class BookServiceTest {
         BookService bookService = new BookService();
 
         // WHEN
-        List<Book> bookList = bookService.getBookByAuthor(AuthorRepository.getAuthorDatabase().get("4"));
+        List<Book> bookList = bookService.getBookbyAuthor(AuthorRepository.getAuthorDatabase().get("4"));
 
         // THEN
         assertThat(bookList.get(0).getIsbn()).isEqualTo("999");
