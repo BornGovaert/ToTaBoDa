@@ -31,8 +31,9 @@ public class BookRepository {
                 listOfBooks.add(bookDatabase.get(isbn));
             } else if (isbn.matches("(.*)" + book.getIsbn() + "(.*)")) {
                 listOfBooks.add(book);
-            } else {
-                throw new IllegalArgumentException(String.format("No book found for isbn:%s", isbn));
+            }
+            else {
+               throw new IllegalArgumentException(String.format("No book found for isbn:%s", isbn));
             }
         }
         return listOfBooks;
@@ -41,7 +42,7 @@ public class BookRepository {
     public static List<Book> getBookInformationTitle(String title) throws IllegalArgumentException {
         List<Book> listOfBooks = new ArrayList<>();
         for (Book book : bookDatabase.values()) {
-            if (book.getIsbn().equals(title)) {
+            if (book.getTitle().equals(title)) {
                 listOfBooks.add(bookDatabase.get(title));
             } else if (title.matches("(.*)" + book.getTitle() + "(.*)")) {
                 listOfBooks.add(book);
