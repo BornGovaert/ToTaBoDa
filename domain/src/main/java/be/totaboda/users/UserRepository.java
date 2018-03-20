@@ -1,5 +1,6 @@
 package be.totaboda.users;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ public class UserRepository {
     Map<Integer, LoggedInUser> users;
     private int idCounter = 0;
 
+    @Inject
     public UserRepository(UserData userData) {
         users = new HashMap<>();
         userData.getDefaultUsers()
