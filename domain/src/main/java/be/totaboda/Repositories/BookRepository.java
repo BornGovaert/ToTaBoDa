@@ -45,9 +45,9 @@ public class BookRepository {
         List<Book> listOfBooks = new ArrayList<>();
 
         for (Book book : bookDatabase.values()) {
-            if (book.getTitle().equals(title)) {
+            if (book.getTitle().toLowerCase().equals(title.toLowerCase())) {
                 listOfBooks.add(book);
-            } else if (book.getTitle().contains(title)) {
+            } else if (book.getTitle().toLowerCase().contains(title.toLowerCase())) {
                 listOfBooks.add(book);
             }
         }
