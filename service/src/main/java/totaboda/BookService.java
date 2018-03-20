@@ -11,20 +11,15 @@ import java.util.logging.Logger;
 
 public class BookService {
 
-    private BookRepository bookRepo;
     private final static Logger LOGGER = Logger.getLogger(BookService.class.getName());
 
-    public BookService(BookRepository bookRepo) {
-        this.bookRepo = bookRepo;
-    }
-
     public List<Book> getBooks() {
-        return bookRepo.getBooks();
+        return BookRepository.getBooks();
     }
 
     public List<Book> getBookISBN(String isbn) {
         try {
-            return bookRepo.getBookInformationISBN(isbn);
+            return BookRepository.getBookInformationISBN(isbn);
         } catch (IllegalArgumentException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
             List<Book> bookList = new ArrayList<>();
@@ -35,7 +30,7 @@ public class BookService {
 
     public List<Book> getbookTitle(String title){
         try {
-            return bookRepo.getBookInformationTitle(title);
+            return BookRepository.getBookInformationTitle(title);
         } catch (IllegalArgumentException e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
             List<Book> bookList = new ArrayList<>();
@@ -46,7 +41,7 @@ public class BookService {
 
     public List<Book> getBookbyAuthor(Author author){
         try {
-            return bookRepo.getBooksGivenAuthor(author);
+            return BookRepository.getBooksGivenAuthor(author);
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
             List<Book> bookList = new ArrayList<>();
@@ -57,7 +52,7 @@ public class BookService {
 
     public List<Book> getBookGivenPartialAuthorName(String partialAuthorName){
         try {
-            return bookRepo.getBookGivenPartialAuthor(partialAuthorName);
+            return BookRepository.getBookGivenPartialAuthor(partialAuthorName);
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, e.getMessage());
             List<Book> bookList = new ArrayList<>();
