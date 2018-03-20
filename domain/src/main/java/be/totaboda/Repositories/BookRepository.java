@@ -19,6 +19,7 @@ public class BookRepository {
                             .put("123", new Book("123", "Azkaban", AuthorRepository.getAuthorDatabase().get("1")))
                             .put("111", new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2")))
                             .put("666", new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3")))
+                            .put("999", new Book("999", "Zorro", AuthorRepository.getAuthorDatabase().get("4")))
                             .build()
             );
 
