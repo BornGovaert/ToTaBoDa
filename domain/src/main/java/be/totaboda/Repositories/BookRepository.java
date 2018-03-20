@@ -32,9 +32,9 @@ public class BookRepository {
             } else if (isbn.matches("(.*)" + book.getIsbn() + "(.*)")) {
                 listOfBooks.add(book);
             }
-            else {
-               throw new IllegalArgumentException(String.format("No book found for isbn:%s", isbn));
-            }
+        }
+        if (listOfBooks.isEmpty()) {
+            throw new IllegalArgumentException(String.format("No book found for isbn:%s", isbn));
         }
         return listOfBooks;
     }
@@ -87,8 +87,7 @@ public class BookRepository {
                     books.add(book);
                 } else if (author.matches("(.*)" + book.getAuthor().getLastName() + "(.*)")) {
                     books.add(book);
-                }
-                else {
+                } else {
                     throw new IllegalArgumentException(String.format("No books found for author:%s", author));
                 }
             }
@@ -100,7 +99,7 @@ public class BookRepository {
         return new ArrayList<Book>(bookDatabase.values());
     }
 
-    public static Book createBook(String isbn,Book book) {
+    public static Book createBook(String isbn, Book book) {
         return bookDatabase.put("", book);
     }
 
