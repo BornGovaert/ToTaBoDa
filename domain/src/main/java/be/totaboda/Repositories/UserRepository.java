@@ -3,9 +3,11 @@ package be.totaboda.Repositories;
 import be.totaboda.Users.Employee;
 import be.totaboda.Users.LoggedInUser;
 import be.totaboda.Users.Member;
+import be.totaboda.Users.Role;
 
 import javax.inject.Named;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Named
 public class UserRepository {
@@ -19,7 +21,7 @@ public class UserRepository {
     }
 
     public LoggedInUser getUserById(int userId) {
-        if(!users.keySet().contains(userId)){
+        if (!users.keySet().contains(userId)) {
             throw new IllegalArgumentException("No such user found.");
         }
         return users.get(userId);
@@ -37,11 +39,10 @@ public class UserRepository {
     }
 
     public void removeUser(int userId) {
-        if(!users.keySet().contains(userId)){
+        if (!users.keySet().contains(userId)) {
             throw new IllegalArgumentException("No such user found.");
-        }
-        else{
-        users.remove(userId);
+        } else {
+            users.remove(userId);
         }
     }
 
@@ -56,9 +57,20 @@ public class UserRepository {
     }
 
     public List<Member> getAllMembers() {
-        return null;
+        return users
+                .values()
+                .stream()
+                .filter(x -> x.getRole().equals(Role.ROLE_MEMBER))
+                .map(x -> (Member) x)
+                .collect(Collectors.toList());
     }
+
     public List<Employee> getAllEmployees() {
-        return null;
+        return users
+                .values()
+                .stream()
+                .filter(x -> !x.getRole().equals(Role.ROLE_MEMBER))
+                .map(x -> (Employee) x)
+                .collect(Collectors.toList());
     }
 }
