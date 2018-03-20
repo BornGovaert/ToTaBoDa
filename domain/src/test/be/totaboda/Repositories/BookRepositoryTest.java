@@ -125,7 +125,7 @@ public class BookRepositoryTest {
         Book bookToAdd = new Book("testBook", "Serious Book Title", AuthorRepository.getAuthorDatabase().get("1"));
 
         BookRepository newBookRepo = new BookRepository();
-        newBookRepo.createBook("testBook", bookToAdd);
+        newBookRepo.createBook("testBook", "Serious Book Title", "Rowling");
 
         Assertions.assertThat(newBookRepo.getBooks()).contains(bookToAdd);
     }
@@ -137,7 +137,7 @@ public class BookRepositoryTest {
         BookRepository newBookRepo = new BookRepository();
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
-                -> newBookRepo.createBook("testBook", bookToAdd));
+                -> newBookRepo.createBook("testBook", "Serious Book Title", "Armstrong"));
     }
 
     @Test
