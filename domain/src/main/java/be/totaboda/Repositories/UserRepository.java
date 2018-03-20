@@ -8,7 +8,7 @@ import java.util.*;
 @Named
 public class UserRepository {
     Map<Integer, LoggedInUser> users;
-    private static int idCounter = 0;
+    private int idCounter = 0;
 
     public UserRepository(UserData userData) {
         users = new HashMap<>();
@@ -17,6 +17,9 @@ public class UserRepository {
     }
 
     public LoggedInUser getUserById(int userId) {
+        if(!users.keySet().contains(userId)){
+            throw new IllegalArgumentException("No such user found.");
+        }
         return users.get(userId);
     }
 
@@ -32,7 +35,12 @@ public class UserRepository {
     }
 
     public void removeUser(int userId) {
+        if(!users.keySet().contains(userId)){
+            throw new IllegalArgumentException("No such user found.");
+        }
+        else{
         users.remove(userId);
+        }
     }
 
     public LoggedInUser updateUser(int userID, LoggedInUser user) {
