@@ -23,7 +23,7 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @PostMapping(path= "/members", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto createMember (@RequestBody UserDto member) {
         Member newMember = (Member) userService.addUser(userMapper.toMember(member));

@@ -25,6 +25,7 @@ public class UserMapper {
 
     public UserDto memberToDto(Member member) {
         return new UserDto()
+                .withUserId(member.getUserId())
                 .withFirstName(member.getFirstName())
                 .withLastName(member.getLastName())
                 .witheMail(member.geteMail())
@@ -32,6 +33,7 @@ public class UserMapper {
                 .withStreetName(member.getStreetName())
                 .withPostalCode(member.getPostalCode())
                 .withCity(member.getCity())
-                .withInss(member.getInss());
+                .withInss(member.getInss())
+                .withRole(member.getRole());
     }
 }
