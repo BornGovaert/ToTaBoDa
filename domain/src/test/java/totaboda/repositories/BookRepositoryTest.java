@@ -1,3 +1,4 @@
+
 //package totaboda.repositories;
 //
 //
@@ -93,16 +94,7 @@
 //                .doesNotContain(notExpectedBook);
 //    }
 //
-//    @Test
-//    void getBooksGivenAuthor_givenNonExistingAuthor_throwIllegalArgumentException(){
-//        Author author = new Author("89", "Dag", "Allemal");
-//        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-//            bookRepository.getBooksGivenAuthor(author);
-//        });
-//
-//        assertEquals(exception.getMessage(), "No books found for author:"+ author);
-//    }
-//
+
 //    @Test
 //    void getBookGivenPartialAuthor_givenLetter_N_returnsListOfBooksWhereAuthorContainsLetter_N(){
 //        Book expectedBook1 = new Book("123", "Azkaban", authorRepository.getAuthorDatabase().get("1"));
@@ -115,7 +107,7 @@
 //                .containsExactlyInAnyOrder(expectedBook1, expectedBook2)
 //                .doesNotContain(notExpectedBook);
 //    }
-//
+
 //    @Test
 //    void getBookGivenPartialAuthor_givenNonExistentString_throwsIllegalArgumentExceptio(){
 //        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -182,3 +174,4 @@
 //    }
 //
 //}
+
