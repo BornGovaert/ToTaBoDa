@@ -29,6 +29,7 @@ public class UserController {
         Member newMember = (Member) userService.addUser(userMapper.toMember(member));
         return userMapper.memberToDto(newMember);
     }
+
     @GetMapping(path = "/members/{memberId}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public UserDto getMember(@PathVariable int memberId) {
