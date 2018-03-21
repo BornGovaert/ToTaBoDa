@@ -152,7 +152,7 @@ public class BookRepositoryTest {
         Book bookToDelete = new Book("111", "DaVinci", authorRepository.getAuthorDatabase().get("2"));
 
         BookRepository newBookRepo = new BookRepository();
-        bookRepository.deleteBook("111");
+        newBookRepo.deleteBook("111");
 
         Assertions.assertThat(newBookRepo.getBooks()).doesNotContain(bookToDelete);
     }

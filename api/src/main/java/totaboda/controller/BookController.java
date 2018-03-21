@@ -35,7 +35,7 @@ public class BookController {
         return booksDto;
     }
 
-    @GetMapping(path = "/isbn:{isbn}", produces = "application/json")
+    @GetMapping(path = "/isbn/{isbn}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public List<BookDto> getBooksByIsbn(@PathVariable String isbn){
         ArrayList<BookDto> booksByIsbn = new ArrayList<>();
@@ -65,6 +65,18 @@ public class BookController {
             booksByAuthor.add(BookMapper.bookMapper(book));
         }
         return booksByAuthor;
+    }
+
+    @PostMapping(produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteBook(@PathVariable("book") String isbn) {
+        bookService.deleteBook(isbn);
+    }
+
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateBook(@RequestBody BookDto bookdto) {
+        bookService.updateBook(BookMapper.dtoToBook(bookdto));
     }
 
 }
