@@ -75,8 +75,8 @@ public class BookController {
 
     @PostMapping(consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public void updateBook(@RequestBody Book book) {
-        bookService.updateBook(book);
+    public void updateBook(@RequestBody BookDto bookdto) {
+        bookService.updateBook(BookMapper.dtoToBook(bookdto));
     }
 
 }
