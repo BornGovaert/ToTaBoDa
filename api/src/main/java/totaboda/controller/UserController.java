@@ -1,5 +1,6 @@
 package totaboda.controller;
 
+import totaboda.users.Employee;
 import totaboda.users.Member;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,13 @@ public class UserController {
     public UserDto createMember (@RequestBody UserDto member) {
         Member newMember = (Member) userService.addUser(userMapper.toMember(member));
         return userMapper.memberToDto(newMember);
+    }
+
+    @PostMapping(path= "/members", consumes = "application/json", produces = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public UserDto createEmployee(@RequestBody UserDto employee) {
+        Employee newEmployee = (Employee) userService.addUser(userMapper.mapDtoToEmployee(employee));
+        return userMapper.mapEmployeeToDto(newEmployee);
     }
 
     @GetMapping(path = "/members/{memberId}", produces = "application/json")
