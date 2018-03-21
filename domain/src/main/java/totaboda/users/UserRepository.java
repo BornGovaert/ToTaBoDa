@@ -5,6 +5,8 @@ import javax.inject.Named;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static totaboda.users.Role.ROLE_MEMBER;
+
 @Named
 public class UserRepository {
     Map<Integer, LoggedInUser> users;
@@ -28,7 +30,10 @@ public class UserRepository {
         return Collections.unmodifiableList(new ArrayList<LoggedInUser>(users.values()));
     }
 
-    public LoggedInUser addUser(LoggedInUser user) {
+    public LoggedInUser addUser(LoggedInUser user) throws IllegalArgumentException {
+        if (user.getRole().equals(ROLE_MEMBER) && !isUnique((Member) user)) {
+            throw new IllegalArgumentException("E-mail or INSS already exist.");
+        }
         user.setUserId(idCounter);
         users.put(idCounter, user);
         idCounter++;
@@ -53,7 +58,7 @@ public class UserRepository {
         return user;
     }
 
-    public boolean assertThatUserExist(int userId){
+    public boolean assertThatUserExist(int userId) {
         return users.keySet().contains(userId);
     }
 
@@ -61,7 +66,7 @@ public class UserRepository {
         return users
                 .values()
                 .stream()
-                .filter(x -> x.getRole().equals(Role.ROLE_MEMBER))
+                .filter(x -> x.getRole().equals(ROLE_MEMBER))
                 .map(x -> (Member) x)
                 .collect(Collectors.toList());
     }
@@ -70,8 +75,19 @@ public class UserRepository {
         return users
                 .values()
                 .stream()
-                .filter(x -> !x.getRole().equals(Role.ROLE_MEMBER))
+                .filter(x -> !x.getRole().equals(ROLE_MEMBER))
                 .map(x -> (Employee) x)
                 .collect(Collectors.toList());
+    }
+
+    public boolean isUnique(Member user) {
+
+        return !getAllMembers()
+                .stream()
+                .anyMatch(x -> x.getInss().equals(user.getInss()))
+                &&
+                !getAllMembers()
+                        .stream()
+                        .anyMatch(x -> x.geteMail().equals(user.geteMail()));
     }
 }
