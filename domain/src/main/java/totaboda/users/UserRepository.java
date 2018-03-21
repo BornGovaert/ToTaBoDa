@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 @Named
 public class UserRepository {
     Map<Integer, LoggedInUser> users;
-    private int idCounter = 0;
+    private int idCounter = 1;
 
     @Inject
     public UserRepository(UserData userData) {

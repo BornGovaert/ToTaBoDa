@@ -8,9 +8,7 @@ public class Employee implements LoggedInUser{
     public Employee(UserBuilder userBuilder) {
         this.firstName = userBuilder.getFirstName();
         this.lastName = userBuilder.getLastName();
-
         this.eMail = userBuilder.geteMail();
-
         this.role = userBuilder.getRole();
     }
 
