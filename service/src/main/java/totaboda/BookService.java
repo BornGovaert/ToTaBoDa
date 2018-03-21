@@ -22,8 +22,6 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-
-
     public List<Book> getBooks() {
         return bookRepository.getBooks();
     }
