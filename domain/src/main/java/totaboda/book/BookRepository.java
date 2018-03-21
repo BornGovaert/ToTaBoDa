@@ -131,7 +131,6 @@ public class BookRepository {
         if (bookDatabase.containsKey(book.getIsbn())) {
             bookDatabase.put(book.getIsbn(), book);
         } else if (!(bookDatabase.containsKey(book.getIsbn())))
-
         {
             throw new IllegalArgumentException("Can't find a book with that isbn");
         }

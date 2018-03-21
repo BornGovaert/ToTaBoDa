@@ -15,23 +15,25 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BookRepositoryTest {
 
+    private BookRepository bookRepository;
+    private AuthorRepository authorRepository;
 
     @Test
     void getBookInformationISBN_happyPath(){
-        Book expectedBook = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
+        Book expectedBook = new Book("666", "Kaas", authorRepository.getAuthorDatabase().get("3"));
 
-        List<Book> actualBooks = BookRepository.getBookInformationISBN("666");
+        List<Book> actualBooks = bookRepository.getBookInformationISBN("666");
 
         Assertions.assertThat(actualBooks).containsExactly(expectedBook);
     }
 
     @Test
     void getBookInformationISBN_givenISBNumber1_returnsListOfBooksContainingISBNnumber1(){
-        Book expectedBook1 = new Book("123", "Azkaban", AuthorRepository.getAuthorDatabase().get("1"));
-        Book expectedBook2 = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
-        Book notExpectedBook = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
+        Book expectedBook1 = new Book("123", "Azkaban", authorRepository.getAuthorDatabase().get("1"));
+        Book expectedBook2 = new Book("111", "DaVinci", authorRepository.getAuthorDatabase().get("2"));
+        Book notExpectedBook = new Book("666", "Kaas", authorRepository.getAuthorDatabase().get("3"));
 
-        List<Book> actualBooks = BookRepository.getBookInformationISBN("1");
+        List<Book> actualBooks = bookRepository.getBookInformationISBN("1");
 
         Assertions.assertThat(actualBooks)
                 .containsExactlyInAnyOrder(expectedBook1, expectedBook2)
@@ -41,7 +43,7 @@ public class BookRepositoryTest {
     @Test
     void getBookInformationISBN_givenNonExistentISBN_throwIllegalArgumentException(){
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-           BookRepository.getBookInformationISBN("xoxo");
+           bookRepository.getBookInformationISBN("xoxo");
         });
 
         assertEquals(exception.getMessage(), "No book found for isbn:xoxo");
@@ -49,20 +51,20 @@ public class BookRepositoryTest {
 
     @Test
     void getBookInformationTitle_happyPath(){
-        Book expectedBook = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
+        Book expectedBook = new Book("666", "Kaas", authorRepository.getAuthorDatabase().get("3"));
 
-        List<Book> actualBooks = BookRepository.getBookInformationTitle("Kaas");
+        List<Book> actualBooks = bookRepository.getBookInformationTitle("Kaas");
 
         Assertions.assertThat(actualBooks).containsExactly(expectedBook);
     }
 
     @Test
     void getBookInformationTitle_givenLetter_Z_returnsListOfBooksContainingLetter_Z(){
-        Book expectedBook1 = new Book("123", "Azkaban", AuthorRepository.getAuthorDatabase().get("1"));
-        Book expectedBook2 = new Book("999", "Zorro", AuthorRepository.getAuthorDatabase().get("4"));
-        Book notExpectedBook = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
+        Book expectedBook1 = new Book("123", "Azkaban", authorRepository.getAuthorDatabase().get("1"));
+        Book expectedBook2 = new Book("999", "Zorro", authorRepository.getAuthorDatabase().get("4"));
+        Book notExpectedBook = new Book("666", "Kaas", authorRepository.getAuthorDatabase().get("3"));
 
-        List<Book> actualBooks = BookRepository.getBookInformationTitle("z");
+        List<Book> actualBooks = bookRepository.getBookInformationTitle("z");
 
         Assertions.assertThat(actualBooks)
                 .containsExactlyInAnyOrder(expectedBook1, expectedBook2)
@@ -72,7 +74,7 @@ public class BookRepositoryTest {
     @Test
     void getBookInformationTitle_givenNonExistentTitle_throwIllegalArgumentException(){
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            BookRepository.getBookInformationTitle("xoxo");
+            bookRepository.getBookInformationTitle("xoxo");
         });
 
         assertEquals(exception.getMessage(), "No book found for title:xoxo");
@@ -81,10 +83,10 @@ public class BookRepositoryTest {
     @Test
     void getBooksGivenAuthor_happyPath(){
         Author author = new Author("2", "Dan", "Brown");
-        Book expectedBook = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
-        Book notExpectedBook = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
+        Book expectedBook = new Book("111", "DaVinci", authorRepository.getAuthorDatabase().get("2"));
+        Book notExpectedBook = new Book("666", "Kaas", authorRepository.getAuthorDatabase().get("3"));
 
-        List<Book> actualBooks = BookRepository.getBooksGivenAuthor(author);
+        List<Book> actualBooks = bookRepository.getBooksGivenAuthor(author);
 
         Assertions.assertThat(actualBooks)
                 .containsExactlyInAnyOrder(expectedBook)
@@ -95,7 +97,7 @@ public class BookRepositoryTest {
     void getBooksGivenAuthor_givenNonExistingAuthor_throwIllegalArgumentException(){
         Author author = new Author("89", "Dag", "Allemal");
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            BookRepository.getBooksGivenAuthor(author);
+            bookRepository.getBooksGivenAuthor(author);
         });
 
         assertEquals(exception.getMessage(), "No books found for author:"+ author);
@@ -103,11 +105,11 @@ public class BookRepositoryTest {
 
     @Test
     void getBookGivenPartialAuthor_givenLetter_N_returnsListOfBooksWhereAuthorContainsLetter_N(){
-        Book expectedBook1 = new Book("123", "Azkaban", AuthorRepository.getAuthorDatabase().get("1"));
-        Book expectedBook2 = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
-        Book notExpectedBook = new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3"));
+        Book expectedBook1 = new Book("123", "Azkaban", authorRepository.getAuthorDatabase().get("1"));
+        Book expectedBook2 = new Book("111", "DaVinci", authorRepository.getAuthorDatabase().get("2"));
+        Book notExpectedBook = new Book("666", "Kaas", authorRepository.getAuthorDatabase().get("3"));
 
-        List<Book> actualBooks = BookRepository.getBookGivenPartialAuthor("n");
+        List<Book> actualBooks = bookRepository.getBookGivenPartialAuthor("n");
 
         Assertions.assertThat(actualBooks)
                 .containsExactlyInAnyOrder(expectedBook1, expectedBook2)
@@ -117,7 +119,7 @@ public class BookRepositoryTest {
     @Test
     void getBookGivenPartialAuthor_givenNonExistentString_throwsIllegalArgumentExceptio(){
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            BookRepository.getBookGivenPartialAuthor("sdjfjkskdf");
+            bookRepository.getBookGivenPartialAuthor("sdjfjkskdf");
         });
 
         assertEquals(exception.getMessage(), "No books found for author:sdjfjkskdf");
@@ -125,7 +127,7 @@ public class BookRepositoryTest {
 
     @Test
     void createBook_happyPath(){
-        Book bookToAdd = new Book("testBook", "Serious Book Title", AuthorRepository.getAuthorDatabase().get("1"));
+        Book bookToAdd = new Book("testBook", "Serious Book Title", authorRepository.getAuthorDatabase().get("1"));
 
         BookRepository newBookRepo = new BookRepository();
         newBookRepo.createBook("testBook", "Serious Book Title", "Rowling");
@@ -146,17 +148,17 @@ public class BookRepositoryTest {
 
     @Test
     void deleteBook_happyPath(){
-        Book bookToDelete = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
+        Book bookToDelete = new Book("111", "DaVinci", authorRepository.getAuthorDatabase().get("2"));
 
         BookRepository newBookRepo = new BookRepository();
-        BookRepository.deleteBook("111");
+        bookRepository.deleteBook("111");
 
         Assertions.assertThat(newBookRepo.getBooks()).doesNotContain(bookToDelete);
     }
 
     @Test
     void deleteBook_throwsException(){
-        Book bookToDelete = new Book("456", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
+        Book bookToDelete = new Book("456", "DaVinci", authorRepository.getAuthorDatabase().get("2"));
 
         BookRepository newBookRepo = new BookRepository();
 
@@ -168,8 +170,8 @@ public class BookRepositoryTest {
 
     @Test
     void updateBook_happyPath(){
-        Book bookOldInfo = new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2"));
-        Book bookNewInfo = new Book("111", "Da Vinci Code", AuthorRepository.getAuthorDatabase().get("2"));
+        Book bookOldInfo = new Book("111", "DaVinci", authorRepository.getAuthorDatabase().get("2"));
+        Book bookNewInfo = new Book("111", "Da Vinci Code", authorRepository.getAuthorDatabase().get("2"));
 
         BookRepository newBookRepo = new BookRepository();
         newBookRepo.updateBook(bookNewInfo);
@@ -179,8 +181,4 @@ public class BookRepositoryTest {
                 .doesNotContain(bookOldInfo);
     }
 
-//    @Test
-//    void updateBook_throwsException(){
-//        Assertions.fail("");
-//    }
 }
