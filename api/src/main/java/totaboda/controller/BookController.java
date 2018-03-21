@@ -67,4 +67,16 @@ public class BookController {
         return booksByAuthor;
     }
 
+    @PostMapping(produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteBook(@PathVariable("book") String isbn) {
+        bookService.deleteBook(isbn);
+    }
+
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateBook(@RequestBody Book book) {
+        bookService.updateBook(book);
+    }
+
 }

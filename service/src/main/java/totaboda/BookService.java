@@ -59,7 +59,19 @@ public class BookService {
             bookList.add(new Book("Unknown ISBN", "Unknown Title", new Author("Unknown id", "Unknown FirstName", "Unknown LastName")));
             return bookList;
         }
-    }}
+    }
+
+    public void updateBook(Book book) {
+       bookRepository.updateBook(book);
+    }
+
+    public void deleteBook(String isbn) {
+        bookRepository.deleteBook(isbn);
+    }
+
+}
+
+
 
 //    public List<Book> getBookGivenPartialAuthorName(String partialAuthorName){
 //        try {
