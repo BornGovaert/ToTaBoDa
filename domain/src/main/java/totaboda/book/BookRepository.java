@@ -13,27 +13,25 @@ import java.util.List;
 public class BookRepository {
 
     private AuthorRepository authorRepository = new AuthorRepository();
-    private static HashMap<String, Book> bookDatabase =
+
+    private  HashMap<String, Book> bookDatabase =
             Maps.newHashMap(
                     new ImmutableMap.Builder<String, Book>()
-                            .put("123", new Book("123", "Azkaban", AuthorRepository.getAuthorDatabase().get("1")))
-                            .put("111", new Book("111", "DaVinci", AuthorRepository.getAuthorDatabase().get("2")))
-                            .put("666", new Book("666", "Kaas", AuthorRepository.getAuthorDatabase().get("3")))
-                            .put("999", new Book("999", "Zorro", AuthorRepository.getAuthorDatabase().get("4")))
+                            .put("123", new Book("123", "Azkaban", authorRepository.getAuthorDatabase().get("1")))
+                            .put("111", new Book("111", "DaVinci", authorRepository.getAuthorDatabase().get("2")))
+                            .put("666", new Book("666", "Kaas", authorRepository.getAuthorDatabase().get("3")))
+                            .put("999", new Book("999", "Zorro", authorRepository.getAuthorDatabase().get("4")))
                             .build()
             );
 
-    public static List<Book> getBookInformationISBN(String isbn) throws IllegalArgumentException {
+    public List<Book> getBookInformationISBN(String isbn) throws IllegalArgumentException {
         List<Book> listOfBooks = new ArrayList<>();
-
         for (Book book : bookDatabase.values()) {
-
-
             if (book.getIsbn().equals(isbn)) {
                 listOfBooks.add(bookDatabase.get(isbn));
             } else if (book.getIsbn().startsWith(isbn)) {
                 listOfBooks.add(book);
-            }//isbn.matches("[a-zA-Z0-9]*{" + test + "} +[a-zA-Z0-9]*")
+            }
         }
         if (listOfBooks.isEmpty()) {
             throw new IllegalArgumentException(String.format("No book found for isbn:%s", isbn));
@@ -41,9 +39,8 @@ public class BookRepository {
         return listOfBooks;
     }
 
-    public static List<Book> getBookInformationTitle(String title) throws IllegalArgumentException {
+    public List<Book> getBookInformationTitle(String title) throws IllegalArgumentException {
         List<Book> listOfBooks = new ArrayList<>();
-
         for (Book book : bookDatabase.values()) {
             if (book.getTitle().toLowerCase().equals(title.toLowerCase())) {
                 listOfBooks.add(book);
@@ -57,7 +54,7 @@ public class BookRepository {
         return listOfBooks;
     }
 
-    public static List<Book> getBooksGivenAuthor(Author author) throws IllegalArgumentException {
+    public List<Book> getBooksGivenAuthor(Author author) throws IllegalArgumentException {
         List<Book> listOfBooks = new ArrayList<>();
         for (Book book : bookDatabase.values()) {
             if (book.getAuthor().equals(author)) {
@@ -67,16 +64,14 @@ public class BookRepository {
         if (listOfBooks.isEmpty()) {
             throw new IllegalArgumentException(String.format("No books found for author:%s", author));
         }
-
         return listOfBooks;
     }
 
-    public static List<Book> getBookGivenPartialAuthor(String author) throws IllegalArgumentException {
+    public List<Book> getBookGivenPartialAuthor(String author) throws IllegalArgumentException {
         List<Book> listOfBooks = new ArrayList<>();
         for (Book book : bookDatabase.values()) {
             if (author.contains(" ")) {
                 String[] parts = author.split(" ");
-
                 if (book.getAuthor().getFirstName().toLowerCase().contains(parts[1].toLowerCase())) {
                     listOfBooks.add(book);
                 } else if (book.getAuthor().getLastName().toLowerCase().contains(parts[1].toLowerCase())) {
@@ -100,13 +95,13 @@ public class BookRepository {
         return listOfBooks;
     }
 
-    public static List<Book> getBooks() {
+    public List<Book> getBooks() {
         return new ArrayList<>(bookDatabase.values());
     }
 
-    public static Book createBook(String isbn, String title, String lastName) {
+    public Book createBook(String isbn, String title, String lastName) {
         ArrayList<Author> authorList = new ArrayList<>();
-        for (Author author : AuthorRepository.getAuthorDatabase().values()) {
+        for (Author author : authorRepository.getAuthorDatabase().values()) {
             if (author.getLastName().toLowerCase().equals(lastName.toLowerCase())) {
                 authorList.add(author);
             }
@@ -122,9 +117,9 @@ public class BookRepository {
 
     private static ArrayList<Book> backupBookList = new ArrayList<>();
 
-    public static void deleteBook(String isbn) throws IllegalArgumentException {
+    public void deleteBook(String isbn) throws IllegalArgumentException {
         if (bookDatabase.containsKey(isbn)) {
-            // backupBookList.add(bookDatabase.get(isbn));
+            backupBookList.add(bookDatabase.get(isbn));
             bookDatabase.remove(isbn);
         } else if (!(bookDatabase.containsKey(isbn))) {
             throw new IllegalArgumentException("Can't find a book with that isbn");
@@ -132,7 +127,7 @@ public class BookRepository {
 
     }
 
-    public static void updateBook(Book book) {
+    public void updateBook(Book book) {
         if (bookDatabase.containsKey(book.getIsbn())) {
             bookDatabase.put(book.getIsbn(), book);
         } else if (!(bookDatabase.containsKey(book.getIsbn())))
@@ -142,7 +137,6 @@ public class BookRepository {
         }
         for (
                 Book bookInList : backupBookList)
-
         {
             if (bookInList.getIsbn().equals(book.getIsbn())) {
                 backupBookList.set(backupBookList.indexOf(bookInList), book);
@@ -151,7 +145,7 @@ public class BookRepository {
 
     }
 
-    public static void restoreBook(Book book) {
+    public void restoreBook(Book book) {
         for (Book bookInList : backupBookList) {
             if (bookInList.getIsbn().equals(book.getIsbn())) {
                 bookDatabase.put(bookInList.getIsbn(), bookInList);
