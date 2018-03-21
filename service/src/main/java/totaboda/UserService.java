@@ -1,5 +1,6 @@
 package totaboda;
 
+import totaboda.exceptions.UnknownUserException;
 import totaboda.users.UserRepository;
 import totaboda.users.Employee;
 import totaboda.users.LoggedInUser;
@@ -54,7 +55,7 @@ public class UserService {
         if(userRepository.assertThatUserExist(userID)){
             return userRepository.updateUser(userID,user);
         }
-        throw new UnknownResourceException("User","User ID: "+ userID);
+        throw new UnknownUserException(String.format("Update user failed. User %s $s with id: $s does not exist.", user.getFirstName(), user.getLastName(), user.getUserId()));
 
     }
 
