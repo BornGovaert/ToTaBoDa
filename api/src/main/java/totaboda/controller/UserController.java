@@ -40,6 +40,6 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public List<UserDto> getMembers(){
         List<Member> aList = userService.getAllMembers();
-        return aList.stream().map(x->userMapper.memberToDto(x)).collect(Collectors.toList());
+        return aList.stream().map(x->userMapper.memberWithoutSensitiveInformationToDto(x)).collect(Collectors.toList());
     }
 }

@@ -145,6 +145,51 @@ class UserRepositoryTest {
         testRepository.addUser(user2);
         Assertions.assertThat(testRepository.getAllUsers()).containsExactly(user1, user2);
     }
+
+    @Test
+    public void addUser_givenUserWithInssThatAlreadyExists_throwsException() {
+        Mockito.when(mock.getDefaultUsers()).thenReturn(Arrays.asList(user1));
+
+        testRepository = new UserRepository(mock);
+        testRepository.addUser(user2);
+        LoggedInUser user3 = UserBuilder.buildUser()
+                .withFirstName("L")
+                .withLastName("T")
+                .withEMail("t@l.be")
+                .withStreetNumber("4")
+                .withStreetName("x")
+                .withPostalCode("1")
+                .withCity("c")
+                .withInss(user2.getInss())
+                .buildMember();
+
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> testRepository.addUser(user2))
+                .withMessage("E-mail or INSS already exist.");
+    }
+
+    @Test
+    public void addUser_givenUserWithEmailThatAlreadyExists_throwsException() {
+        Mockito.when(mock.getDefaultUsers()).thenReturn(Arrays.asList(user1));
+
+        testRepository = new UserRepository(mock);
+        testRepository.addUser(user2);
+        LoggedInUser user3 = UserBuilder.buildUser()
+                .withFirstName("L")
+                .withLastName("T")
+                .withEMail(user2.geteMail())
+                .withStreetNumber("4")
+                .withStreetName("x")
+                .withPostalCode("1")
+                .withCity("c")
+                .withInss("1324")
+                .buildMember();
+
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> testRepository.addUser(user2))
+                .withMessage("E-mail or INSS already exist.");
+    }
+
     @Test
     public void getAllMembers_returnsListOfMembers () {
         Mockito.when(mock.getDefaultUsers()).thenReturn(Arrays.asList(user1, user2, employee1, employee2));

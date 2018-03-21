@@ -1,5 +1,6 @@
 package totaboda;
 
+import totaboda.exceptions.UnknownUserException;
 import totaboda.users.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -72,10 +73,10 @@ class UserServiceTest {
 
     @Test
     public void removeUser_happyPath() {
-        UserService userService = new UserService(new UserRepository(new UserData()));
+        userService = new UserService(new UserRepository(new UserData()));
         int expectedSize = userService.getAllUsers().size() - 1;
-        LoggedInUser removedUser = userService.getUser(0);
-        userService.removeUser(0);
+        LoggedInUser removedUser = userService.getUser(1);
+        userService.removeUser(1);
         Assertions.assertThat(userService.getAllUsers().size()).isEqualTo(expectedSize);
         Assertions.assertThat(!userService.getAllUsers().contains(removedUser));
     }
@@ -119,7 +120,7 @@ class UserServiceTest {
     @Test
     void updateUser_userNotInRepository() {
         Mockito.when(mockRepository.assertThatUserExist(0)).thenReturn(false);
-        Assertions.assertThatExceptionOfType(UnknownResourceException.class)
+        Assertions.assertThatExceptionOfType(UnknownUserException.class)
                 .isThrownBy(() ->userService.updateUser(0, employee1));
     }
 

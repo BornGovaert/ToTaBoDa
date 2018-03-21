@@ -56,7 +56,6 @@ public class UserService {
             return userRepository.updateUser(userID,user);
         }
         throw new UnknownUserException(String.format("Update user failed. User %s $s with id: $s does not exist.", user.getFirstName(), user.getLastName(), user.getUserId()));
-
     }
 
 }
