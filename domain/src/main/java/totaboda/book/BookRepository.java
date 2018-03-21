@@ -27,11 +27,11 @@ public class BookRepository {
         List<Book> listOfBooks = new ArrayList<>();
 
         for (Book book : bookDatabase.values()) {
-            String test = book.getIsbn();
+
 
             if (book.getIsbn().equals(isbn)) {
                 listOfBooks.add(bookDatabase.get(isbn));
-            } else if (test.contains(isbn)) {
+            } else if (book.getIsbn().startsWith(isbn)) {
                 listOfBooks.add(book);
             }//isbn.matches("[a-zA-Z0-9]*{" + test + "} +[a-zA-Z0-9]*")
         }

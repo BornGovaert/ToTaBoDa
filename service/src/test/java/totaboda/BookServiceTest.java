@@ -82,9 +82,6 @@ public class BookServiceTest {
         Mockito.when(bookRepository.getBookGivenPartialAuthor("brow")).thenReturn(returns);
         Assertions.assertThat(bookService.getBookGivenPartialAuthorName("brow")).isEqualTo(returns);
     }
-
-    
-
 }
 
 
