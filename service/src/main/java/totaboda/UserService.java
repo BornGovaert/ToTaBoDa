@@ -9,11 +9,12 @@ import totaboda.exceptions.UnknownResourceException;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Named
 public class UserService {
     private static UserRepository userRepository;
-    
+
     @Inject
     public UserService (UserRepository userRepository) {
         UserService.userRepository = userRepository;
@@ -54,6 +55,7 @@ public class UserService {
             return userRepository.updateUser(userID,user);
         }
         throw new UnknownResourceException("User","User ID: "+ userID);
+
     }
 
 }
