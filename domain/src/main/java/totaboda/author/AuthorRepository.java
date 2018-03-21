@@ -4,10 +4,11 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class AuthorRepository {
 
-    private static HashMap<String, Author> authorDatabase =
+    private static HashMap<String, Author> authorDatabase=
             Maps.newHashMap(
                     new ImmutableMap.Builder<String,Author>()
                             .put("1", new Author("1","JK", "Rowling"))
@@ -16,11 +17,17 @@ public class AuthorRepository {
                             .put("4", new Author("4","Mighty", "Zorro"))
                     .build()
             );
+    private int authorCounter = 5;
 
     public HashMap<String, Author> getAuthorDatabase() {
         return authorDatabase;
     }
 
+    public Author addNewAuthor(Author author){
+        authorDatabase.put(Integer.toString(authorCounter),author);
+        authorCounter++;
+        return author;
+    }
 
 }
 

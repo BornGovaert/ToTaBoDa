@@ -5,7 +5,7 @@ import totaboda.author.Author;
 import java.util.Objects;
 
 public class Book {
-    private String isbn;
+    private final String isbn;
     private String title;
     private Author author;
 
@@ -36,9 +36,6 @@ public class Book {
                 '}';
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
 
     public void setTitle(String title) {
         this.title = title;
