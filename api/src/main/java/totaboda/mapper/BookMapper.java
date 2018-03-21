@@ -9,8 +9,11 @@ public class BookMapper {
         return new BookDto(bookToMap.getIsbn(),
                 bookToMap.getTitle(),
                 bookToMap.getAuthor().getFirstName(),
-                bookToMap.getAuthor().getLastName()
-        );
+                bookToMap.getAuthor().getLastName());
+    }
+
+    public static Book dtoToBook(BookDto book){
+        return null;
     }
 
 }
