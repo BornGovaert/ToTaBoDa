@@ -42,7 +42,7 @@ public class BookService {
         }
     }
 
-    public List<Book> getBookByAuthor(Author author){
+    public List<Book> getBookByAuthor(String author){
         try {
             return bookRepository.getBooksGivenAuthor(author);
         } catch (Exception e) {
@@ -51,16 +51,16 @@ public class BookService {
             bookList.add(new Book("Unknown ISBN", "Unknown Title", new Author("Unknown id", "Unknown FirstName", "Unknown LastName")));
             return bookList;
         }
-    }
+    }}
 
-    public List<Book> getBookGivenPartialAuthorName(String partialAuthorName){
-        try {
-            return bookRepository.getBookGivenPartialAuthor(partialAuthorName);
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.getMessage());
-            List<Book> bookList = new ArrayList<>();
-            bookList.add(new Book("Unknown ISBN", "Unknown Title", new Author("Unknown id", "Unknown FirstName", "Unknown LastName")));
-            return bookList;
-        }
-    }
-}
+//    public List<Book> getBookGivenPartialAuthorName(String partialAuthorName){
+//        try {
+//            return bookRepository.getBookGivenPartialAuthor(partialAuthorName);
+//        } catch (Exception e) {
+//            LOGGER.log(Level.SEVERE, e.getMessage());
+//            List<Book> bookList = new ArrayList<>();
+//            bookList.add(new Book("Unknown ISBN", "Unknown Title", new Author("Unknown id", "Unknown FirstName", "Unknown LastName")));
+//            return bookList;
+//        }
+//    }
+//}

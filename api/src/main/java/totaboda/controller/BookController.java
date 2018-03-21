@@ -45,4 +45,26 @@ public class BookController {
         }
         return booksByIsbn;
     }
+    @GetMapping(path = "/title/{title}", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public List<BookDto> getBooksByTitle(@PathVariable String title){
+        ArrayList<BookDto> booksByTitle = new ArrayList<>();
+        List<Book> booksFoundMatchingTitle = bookService.getBookTitle(title);
+        for(Book book : booksFoundMatchingTitle){
+            booksByTitle.add(BookMapper.bookMapper(book));
+        }
+        return booksByTitle;
+    }
+
+    @GetMapping(path = "/author/{author}", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public List<BookDto> getBooksByAuthor(@PathVariable String author){
+        ArrayList<BookDto> booksByAuthor = new ArrayList<>();
+        List<Book> booksFoundMatchingAuthor = bookService.getBookByAuthor(author);
+        for(Book book : booksFoundMatchingAuthor){
+            booksByAuthor.add(BookMapper.bookMapper(book));
+        }
+        return booksByAuthor;
+    }
+
 }

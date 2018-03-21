@@ -81,22 +81,22 @@ public class BookServiceTest {
         Mockito.when(bookRepository.getBookInformationTitle("Kaas")).thenReturn(returns);
         Assertions.assertThat(bookService.getBookISBN("Kaas")).isEqualTo(returns);
     }
-
-    @Test
-    public void getBookByAuthor_happyPath() {
-        List<Book> returns = new ArrayList<>();
-        returns.add(book1);
-        Mockito.when(bookRepository.getBooksGivenAuthor(new Author("1","JK", "Rowling"))).thenReturn(returns);
-        Assertions.assertThat(bookService.getBookByAuthor(new Author("1","JK", "Rowling"))).isEqualTo(returns);
-    }
-
-    @Test
-    public void getBookGivenPartialAuthorName_happyPath() {
-        List<Book> returns = new ArrayList<>();
-        returns.add(book2);
-        Mockito.when(bookRepository.getBookGivenPartialAuthor("brow")).thenReturn(returns);
-        Assertions.assertThat(bookService.getBookGivenPartialAuthorName("brow")).isEqualTo(returns);
-    }
+//
+//    @Test
+//    public void getBookByAuthor_happyPath() {
+//        List<Book> returns = new ArrayList<>();
+//        returns.add(book1);
+//        Mockito.when(bookRepository.getBooksGivenAuthor(new Author("1","JK", "Rowling"))).thenReturn(returns);
+//        Assertions.assertThat(bookService.getBookByAuthor(new Author("1","JK", "Rowling"))).isEqualTo(returns);
+//    }
+//
+//    @Test
+//    public void getBookGivenPartialAuthorName_happyPath() {
+//        List<Book> returns = new ArrayList<>();
+//        returns.add(book2);
+//        Mockito.when(bookRepository.getBookGivenPartialAuthor("brow")).thenReturn(returns);
+//        Assertions.assertThat(bookService.getBookGivenPartialAuthorName("brow")).isEqualTo(returns);
+//    }
 }
 
 
