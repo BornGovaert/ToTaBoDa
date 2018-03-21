@@ -69,7 +69,7 @@ public class BookRepository {
         }
         return listOfBooks;
     }
-    
+
     public List<Book> getBooks() {
         return new ArrayList<>(bookDatabase.values());
     }
@@ -96,7 +96,7 @@ public class BookRepository {
         if (bookDatabase.containsKey(isbn)) {
             backupBookList.add(bookDatabase.get(isbn));
             bookDatabase.remove(isbn);
-        } else if (!(bookDatabase.containsKey(isbn))) {
+        } else {
             throw new IllegalArgumentException("Can't find a book with that isbn");
         }
 
