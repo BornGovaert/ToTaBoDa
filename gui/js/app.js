@@ -98,7 +98,7 @@ $(document).ready(function () {
 function searchForIsbn() {
     $("#isbn-search-button").click(function (e) {
         e.preventDefault();
-        getAndRenderBooks(BOOKS_RESOURCE);
+        getAndRenderBooks(BOOKS_RESOURCE + "/" + $("#isbn-search-input").val());
     });
 }
 
@@ -113,8 +113,8 @@ function addARandomBook() {
                 showDialog("A random book was added!");
                 showAllBooks();
             },
-            error: function () {
-                alert("It didn't work!!");
+            error: function (data) {
+                showDialog("Something went wrong: <br/>" + data.responseJSON.message)
             },
             contentType: "application/json",
             dataType: 'json'
@@ -131,8 +131,9 @@ function getAndRenderBooks(url) {
     $.getJSON(url, function (data) {
         console.log("--> Great success!");
         console.log(data);
+        data = data instanceof Array ? data : new Array(data);
+        $("#injectable").empty();
         if (data.length > 0) {
-            $("#injectable").empty();
             data.forEach(function (item) {
                 $("#injectable").append(VIEW.renderSingleItem(item), null);
             });
@@ -143,8 +144,8 @@ function getAndRenderBooks(url) {
         .done(function () {
             console.log("--> I'm done (successfully)");
         })
-        .fail(function () {
-            console.log("--> error!");
+        .fail(function (data) {
+            showDialog("Something went wrong: <br/>" + data.responseJSON.message)
         })
         .always(function () {
             console.log("--> finalized...");
