@@ -41,4 +41,21 @@ public class UserMapper {
         userDto.withInss(null);
         return userDto;
     }
+
+    public LoggedInUser mapDtoToEmployee(UserDto userDto){
+        return UserBuilder.buildUser()
+                .withFirstName(userDto.firstName)
+                .withFirstName(userDto.lastName)
+                .withEMail(userDto.eMail)
+                .withRole(userDto.role)
+                .buildEmployee();
+    }
+
+    public UserDto mapEmployeeToDto(LoggedInUser user){
+        return new UserDto()
+                .withFirstName(user.getFirstName())
+                .withFirstName(user.getLastName())
+                .witheMail(user.geteMail())
+                .withRole(user.getRole());
+    }
 }
