@@ -54,10 +54,13 @@ public class BookRepository {
         return listOfBooks;
     }
 
-    public List<Book> getBooksGivenAuthor(Author author) throws IllegalArgumentException {
+    public List<Book> getBooksGivenAuthor(String author) throws IllegalArgumentException {
         List<Book> listOfBooks = new ArrayList<>();
+        String concatenatedName;
         for (Book book : bookDatabase.values()) {
-            if (book.getAuthor().equals(author)) {
+            concatenatedName = (book.getAuthor().getFirstName()+ book.getAuthor()
+                    .getLastName()).toLowerCase();
+            if (concatenatedName.contains((author.replaceAll("[^a-zA-Z]","")).toLowerCase())) {
                 listOfBooks.add(book);
             }
         }
@@ -66,35 +69,7 @@ public class BookRepository {
         }
         return listOfBooks;
     }
-
-    public List<Book> getBookGivenPartialAuthor(String author) throws IllegalArgumentException {
-        List<Book> listOfBooks = new ArrayList<>();
-        for (Book book : bookDatabase.values()) {
-            if (author.contains(" ")) {
-                String[] parts = author.split(" ");
-                if (book.getAuthor().getFirstName().toLowerCase().contains(parts[1].toLowerCase())) {
-                    listOfBooks.add(book);
-                } else if (book.getAuthor().getLastName().toLowerCase().contains(parts[1].toLowerCase())) {
-                    listOfBooks.add(book);
-                } else if (book.getAuthor().getFirstName().toLowerCase().contains(parts[2].toLowerCase())) {
-                    listOfBooks.add(book);
-                } else if (book.getAuthor().getLastName().toLowerCase().contains(parts[2].toLowerCase())) {
-                    listOfBooks.add(book);
-                }
-            } else {
-                if (book.getAuthor().getFirstName().toLowerCase().contains(author.toLowerCase())) {
-                    listOfBooks.add(book);
-                } else if (book.getAuthor().getLastName().toLowerCase().contains(author.toLowerCase())) {
-                    listOfBooks.add(book);
-                }
-            }
-        }
-        if (listOfBooks.isEmpty()) {
-            throw new IllegalArgumentException(String.format("No books found for author:%s", author));
-        }
-        return listOfBooks;
-    }
-
+    
     public List<Book> getBooks() {
         return new ArrayList<>(bookDatabase.values());
     }
