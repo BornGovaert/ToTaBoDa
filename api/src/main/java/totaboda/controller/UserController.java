@@ -31,7 +31,7 @@ public class UserController {
         return userMapper.memberToDto(newMember);
     }
 
-    @PostMapping(path= "/members", consumes = "application/json", produces = "application/json")
+    @PostMapping(path= "/employees", consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto createEmployee(@RequestBody UserDto employee) {
         Employee newEmployee = (Employee) userService.addUser(userMapper.mapDtoToEmployee(employee));
