@@ -98,7 +98,11 @@ $(document).ready(function () {
 function searchForIsbn() {
     $("#isbn-search-button").click(function (e) {
         e.preventDefault();
-        getAndRenderBooks(BOOKS_RESOURCE + "/" + $("#isbn-search-input").val());
+        if($("#isbn-search-input").val()) {
+            getAndRenderBooks(BOOKS_RESOURCE + "/isbn/" + $("#isbn-search-input").val());
+        } else {
+            getAndRenderBooks(BOOKS_RESOURCE + "/" + $("#isbn-search-input").val());
+        }
     });
 }
 
@@ -114,7 +118,7 @@ function addARandomBook() {
                 showAllBooks();
             },
             error: function (data) {
-                showDialog("Something went wrong: <br/>" + data.responseJSON.message)
+                showDialog("Something went wrong: <br/>" + (data.responseJSON ? data.responseJSON.message : data.responseText))
             },
             contentType: "application/json",
             dataType: 'json'
@@ -145,7 +149,7 @@ function getAndRenderBooks(url) {
             console.log("--> I'm done (successfully)");
         })
         .fail(function (data) {
-            showDialog("Something went wrong: <br/>" + data.responseJSON.message)
+            showDialog("Something went wrong: <br/>" + (data.responseJSON ? data.responseJSON.message : data.responseText))
         })
         .always(function () {
             console.log("--> finalized...");
