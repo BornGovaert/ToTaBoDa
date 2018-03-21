@@ -17,7 +17,7 @@ public class AuthorRepository {
                     .build()
             );
 
-    public static HashMap<String, Author> getAuthorDatabase() {
+    public HashMap<String, Author> getAuthorDatabase() {
         return authorDatabase;
     }
 
