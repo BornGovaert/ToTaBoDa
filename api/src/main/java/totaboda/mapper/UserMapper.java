@@ -36,4 +36,9 @@ public class UserMapper {
                 .withInss(member.getInss())
                 .withRole(member.getRole());
     }
+    public UserDto memberWithoutSensitiveInformationToDto(Member member) {
+        UserDto userDto = memberToDto(member);
+        userDto.withInss(null);
+        return userDto;
+    }
 }
