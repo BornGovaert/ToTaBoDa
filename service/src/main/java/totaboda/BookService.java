@@ -4,6 +4,7 @@ import totaboda.author.Author;
 import totaboda.book.Book;
 import totaboda.book.BookRepository;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,15 @@ import java.util.logging.Logger;
 @Named
 public class BookService {
 
+    private BookRepository bookRepository;
     private final static Logger LOGGER = Logger.getLogger(BookService.class.getName());
-    private BookRepository bookRepository = new BookRepository();
+
+    @Inject
+    public BookService(BookRepository bookRepository){
+        this.bookRepository = bookRepository;
+    }
+
+
 
     public List<Book> getBooks() {
         return bookRepository.getBooks();
