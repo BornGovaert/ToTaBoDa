@@ -21,7 +21,7 @@ public class RentalRepository {
         this.lentBooks = lentBooks;
     }
 
-    public void createRental(int memberId, String bookIsbn) {
+    public Rental createRental(int memberId, String bookIsbn) {
         counterId++;
         Rental rentalObject = new Rental(memberId, bookIsbn);
         for (Rental newBook : lentBooks) {
@@ -34,6 +34,7 @@ public class RentalRepository {
             }
         }
         lentBooks.add(rentalObject);
+        return rentalObject;
     }
 
     public static int getCounterId() {
