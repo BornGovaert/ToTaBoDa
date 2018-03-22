@@ -21,7 +21,7 @@ public class RentalRepository {
         counterId++;
         Rental rentalObject = new Rental(memberId, bookIsbn);
         for (Rental newBook : lentBooks) {
-            if (newBook.getMemberInss() == memberId) {
+            if (newBook.getMemberId() == memberId) {
                 amountOfRentals++;
             } else if (newBook.getBookIsbn().equals(bookIsbn)) {
                 throw new IllegalArgumentException("This book is already rented out");    //NEEDS CUSTOM EXCEPTIONS
