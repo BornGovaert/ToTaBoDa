@@ -9,8 +9,6 @@ public class RentalRepository {
     private static int counterId;
     private int amountOfRentals;
 
-    public RentalRepository() {
-    }
 
     public RentalRepository(ArrayList<Rental> lentBooks) {
         this.lentBooks = lentBooks;
@@ -54,6 +52,4 @@ public class RentalRepository {
     public void setAmountOfRentals(int amountOfRentals) {
         this.amountOfRentals = amountOfRentals;
     }
-
-
 }
