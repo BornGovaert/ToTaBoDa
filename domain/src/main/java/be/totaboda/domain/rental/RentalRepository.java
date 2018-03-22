@@ -60,4 +60,6 @@ public class RentalRepository {
     public void setAmountOfRentals(int amountOfRentals) {
         this.amountOfRentals = amountOfRentals;
     }
+
+
 }

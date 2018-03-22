@@ -47,9 +47,10 @@ public class RentalService {
         }
 //        if (noRentalCreatedYet = false) {
 //            throw new LibraryException("Please provide valid id or isbn");
-//        } else {
-//            throw new LibraryException("Please provide valid id or isbn");
-//        }
+  //     }
+       else {
+            throw new LibraryException("Please provide valid id or isbn");
+       }
         return rentalRepository.createRental(memberId, bookIsbn);
     }
 
