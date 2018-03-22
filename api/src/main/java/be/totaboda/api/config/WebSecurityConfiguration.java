@@ -1,5 +1,6 @@
 //package totaboda.config;
-//
+
+//import javax.inject.Named;
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 //import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -32,4 +33,16 @@
 //    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.inMemoryAuthentication().withUser("Admin").password("admin123").roles("ADMIN");
 //    }
+//    @Named
+//    @Override
+//    public UserDetailsService userDetailsService(){
+//            Role role=Enum.valueOf(Role.class,"ROLE_ADMIN");
+//            UserDetails user=
+//            User.withUsername("ADMIN")
+//            .password("password")
+//            .roles("ADMIN")
+//            .build();
+//
+//            return new InMemoryUserDetailsManager(Collections.singleton(user));
+//     }
 //}
