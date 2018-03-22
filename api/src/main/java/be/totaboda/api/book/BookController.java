@@ -75,9 +75,9 @@ public class BookController {
         bookService.deleteBook(isbn);
     }
 
-    @PutMapping(path="/{isbn}",consumes = "application/json", produces = "application/json")
+    @PutMapping(consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public BookDto updateBook(@PathVariable String ISBN, @RequestBody BookDto bookdto) {
+    public BookDto updateBook(@RequestBody BookDto bookdto) {
        return BookMapper.bookToDto(bookService.updateBook(BookMapper.dtoToBook(bookdto)));
     }
 }

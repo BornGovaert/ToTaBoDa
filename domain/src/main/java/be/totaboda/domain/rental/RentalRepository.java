@@ -1,14 +1,18 @@
 package be.totaboda.domain.rental;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.Random;
 
+@Named
 public class RentalRepository {
 
     private ArrayList<Rental> lentBooks;
     private static int counterId;
     private int amountOfRentals;
 
+    @Inject
     public RentalRepository() {
         this.lentBooks = new ArrayList<>();
     }
@@ -21,12 +25,12 @@ public class RentalRepository {
         counterId++;
         Rental rentalObject = new Rental(memberId, bookIsbn);
         for (Rental newBook : lentBooks) {
-            if (newBook.getMemberInss() == memberId) {
+            if (newBook.getMemberId() == memberId) {
                 amountOfRentals++;
             } else if (newBook.getBookIsbn().equals(bookIsbn)) {
                 throw new IllegalArgumentException("This book is already rented out");    //NEEDS CUSTOM EXCEPTIONS
             } else if (amountOfRentals > 2) {
-                throw new IllegalArgumentException("You can only rent 9 bookS.");
+                throw new IllegalArgumentException("You can only rent 9 books.");
             }
         }
         lentBooks.add(rentalObject);

@@ -9,6 +9,8 @@ import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Named
 public class BookRepository {
@@ -28,9 +30,9 @@ public class BookRepository {
     public List<Book> getBookInformationISBN(String isbn) throws IllegalArgumentException {
         List<Book> listOfBooks = new ArrayList<>();
         for (Book book : bookDatabase.values()) {
-            if (book.getIsbn().equals(isbn)) {
+            if (book.getIsbn().equals(isbn) && !book.isDeleted()) {
                 listOfBooks.add(bookDatabase.get(isbn));
-            } else if (book.getIsbn().startsWith(isbn)) {
+            } else if (book.getIsbn().startsWith(isbn)&& !book.isDeleted()) {
                 listOfBooks.add(book);
             }
         }
@@ -43,9 +45,7 @@ public class BookRepository {
     public List<Book> getBookInformationTitle(String title) throws IllegalArgumentException {
         List<Book> listOfBooks = new ArrayList<>();
         for (Book book : bookDatabase.values()) {
-            if (book.getTitle().toLowerCase().equals(title.toLowerCase())) {
-                listOfBooks.add(book);
-            } else if (book.getTitle().toLowerCase().contains(title.toLowerCase())) {
+            if (book.getTitle().toLowerCase().contains(title.toLowerCase())&& !book.isDeleted()) {
                 listOfBooks.add(book);
             }
         }
@@ -61,7 +61,8 @@ public class BookRepository {
         for (Book book : bookDatabase.values()) {
             concatenatedName = (book.getAuthor().getFirstName() + book.getAuthor()
                     .getLastName()).toLowerCase();
-            if (concatenatedName.contains((author.replaceAll("[^a-zA-Z]", "")).toLowerCase())) {
+            if (concatenatedName.contains((author.replaceAll("[^a-zA-Z]", "")).toLowerCase())
+                    && !book.isDeleted()) {
                 listOfBooks.add(book);
             }
         }
@@ -72,7 +73,8 @@ public class BookRepository {
     }
 
     public List<Book> getBooks() {
-        return new ArrayList<>(bookDatabase.values());
+        Predicate<Book> nonDeletedBook = b -> !b.isDeleted();
+        return bookDatabase.values().stream().filter(nonDeletedBook).collect(Collectors.toList());
     }
 
     public Book createBook(Book book) {
@@ -99,6 +101,8 @@ public class BookRepository {
     }
 
     public Book getBook(String isbn) {
+        if(bookDatabase.get(isbn).isDeleted())
+        {throw new IllegalArgumentException("Can't find a book with that isbn");}
         return bookDatabase.get(isbn);
     }
 

@@ -12,7 +12,7 @@ public class Rental {
 
 
     public Rental(int memberId, String bookIsbn) {
-        this.id = RentalRepository.getCounterId();
+        this.id = RentalRepository.getCounterId()+1;
         this.memberId = memberId;
         this.bookIsbn = bookIsbn;
         this.startDate = LocalDate.now();
@@ -23,7 +23,7 @@ public class Rental {
         return id;
     }
 
-    public int getMemberInss() {
+    public int getMemberId() {
         return memberId;
     }
 
