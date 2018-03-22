@@ -56,7 +56,7 @@ class RentalRepositoryTest {
 
     @Test
     void createRental_givenMaxOf9RentalsPerMember_throwException(){
-
+        Assertions.fail("to be implemented");
     }
 
 
