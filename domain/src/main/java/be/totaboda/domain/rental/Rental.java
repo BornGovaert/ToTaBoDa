@@ -10,7 +10,9 @@ public class Rental {
     private LocalDate startDate;
     private LocalDate returnDate;
 
+
     public Rental(String memberInss, String bookIsbn) {
+        this.id = RentalRepository.getCounterId();
         this.memberInss = memberInss;
         this.bookIsbn = bookIsbn;
         this.startDate = LocalDate.now();
@@ -35,5 +37,25 @@ public class Rental {
 
     public LocalDate getReturnDate() {
         return returnDate;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setMemberInss(String memberInss) {
+        this.memberInss = memberInss;
+    }
+
+    public void setBookIsbn(String bookIsbn) {
+        this.bookIsbn = bookIsbn;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
     }
 }
