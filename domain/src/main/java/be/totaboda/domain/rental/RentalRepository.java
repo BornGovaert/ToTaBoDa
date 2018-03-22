@@ -9,6 +9,9 @@ public class RentalRepository {
     private static int counterId;
     private int amountOfRentals;
 
+    public RentalRepository() {
+        this.lentBooks = new ArrayList<>();
+    }
 
     public RentalRepository(ArrayList<Rental> lentBooks) {
         this.lentBooks = lentBooks;
@@ -22,7 +25,7 @@ public class RentalRepository {
                 amountOfRentals++;
             } else if (newBook.getBookIsbn().equals(bookIsbn)) {
                 throw new IllegalArgumentException("This book is already rented out");    //NEEDS CUSTOM EXCEPTIONS
-            } else if (amountOfRentals > 9) {
+            } else if (amountOfRentals > 2) {
                 throw new IllegalArgumentException("You can only rent 9 bookS.");
             }
         }
