@@ -1,14 +1,18 @@
 package be.totaboda.domain.rental;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.Random;
 
+@Named
 public class RentalRepository {
 
     private ArrayList<Rental> lentBooks;
     private static int counterId;
     private int amountOfRentals;
 
+  //  @Inject
     public RentalRepository() {
         this.lentBooks = new ArrayList<>();
     }
