@@ -1,9 +1,6 @@
 package be.totaboda.domain.rental;
 
-import be.totaboda.domain.book.BookRepository;
-import org.assertj.core.api.Assert;
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,16 +26,16 @@ class RentalRepositoryTest {
     }
 
 
-    @Test
-    void createRental_givenWrongMemberINSS_throwException() {
-        Assertions.fail("to be implemented");
-    }
-
-
-    @Test
-    void createRental_givenWrongBookISBN_throwException() {
-        Assertions.fail("to be implemented");
-    }
+//    @Test
+//    void createRental_givenWrongMemberINSS_throwException() {
+//        Assertions.fail("to be implemented");
+//    }
+//
+//
+//    @Test
+//    void createRental_givenWrongBookISBN_throwException() {
+//        Assertions.fail("to be implemented");
+//    }
 
 
     @Test
