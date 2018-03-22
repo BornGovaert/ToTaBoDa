@@ -3,9 +3,11 @@ package be.totaboda.service;
 
 import be.totaboda.domain.book.Book;
 import be.totaboda.domain.book.BookRepository;
+import be.totaboda.domain.rental.Rental;
 import be.totaboda.domain.rental.RentalRepository;
 import be.totaboda.domain.users.Member;
 import be.totaboda.domain.users.UserRepository;
+import be.totaboda.service.exceptions.LibraryException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -27,15 +29,9 @@ public class RentalService {
         this.bookRepository = bookRepository;
     }
 
-    public void createRental(int memberId, String bookIsbn) {
+    public Rental createRental(int memberId, String bookIsbn) {
         boolean noRentalCreatedYet = true;
-        if (memberId > 0 && bookIsbn != null) {
-
-            //Member theMemberIneed = getMemberForMemberId(memberId);
-            // Book bookOfMemberForIsbn = getBookOfMemberByIsbn()
-            // if (bookOfMemberForIsbn) { addItToRepo }
-            // else throw exception
-
+        if (memberId != 0 && bookIsbn != null && noRentalCreatedYet) {
             for (Member member : userRepository.getAllMembers()) {
                 if (member.getUserId() == memberId) {
                     for (Book book : bookRepository.getBooks()) {
@@ -49,11 +45,18 @@ public class RentalService {
                 }
             }
         }
-        if (noRentalCreatedYet == false) {
-            throw new IllegalArgumentException("Please provide valid id or isbn");
-        } else {
-            throw new IllegalArgumentException("Please provide valid id or isbn");
+//        if (noRentalCreatedYet = false) {
+//            throw new LibraryException("Please provide valid id or isbn");
+        //     }
+        else {
+            throw new LibraryException("Please provide valid id or isbn");
         }
+        return rentalRepository.createRental(memberId, bookIsbn);
+    }
+
+
+    public void returnBook(int id) {
+        rentalRepository.returnBook(id);
     }
 
 }

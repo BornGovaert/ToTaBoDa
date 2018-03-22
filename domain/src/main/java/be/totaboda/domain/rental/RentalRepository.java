@@ -2,6 +2,7 @@ package be.totaboda.domain.rental;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -21,7 +22,7 @@ public class RentalRepository {
         this.lentBooks = lentBooks;
     }
 
-    public void createRental(int memberId, String bookIsbn) {
+    public Rental createRental(int memberId, String bookIsbn) {
         counterId++;
         Rental rentalObject = new Rental(memberId, bookIsbn);
         for (Rental newBook : lentBooks) {
@@ -34,6 +35,21 @@ public class RentalRepository {
             }
         }
         lentBooks.add(rentalObject);
+        return rentalObject;
+    }
+
+    public void returnBook(int id) {
+        for (Rental rental : lentBooks) {
+            if (rental.getId() == id) {
+                if (LocalDate.now().isAfter(rental.getReturnDate())) {
+                    throw new IllegalArgumentException("Book is late");
+                } else {
+                    lentBooks.remove(rental);
+                }
+            } else {
+                throw new IllegalArgumentException("No book found with that id");
+            }
+        }
     }
 
     public static int getCounterId() {
@@ -59,4 +75,6 @@ public class RentalRepository {
     public void setAmountOfRentals(int amountOfRentals) {
         this.amountOfRentals = amountOfRentals;
     }
+
+
 }
