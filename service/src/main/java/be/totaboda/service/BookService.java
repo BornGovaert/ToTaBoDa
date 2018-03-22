@@ -3,6 +3,8 @@ package be.totaboda.service;
 import be.totaboda.domain.author.Author;
 import be.totaboda.domain.book.Book;
 import be.totaboda.domain.book.BookRepository;
+import be.totaboda.service.exceptions.LibraryException;
+import be.totaboda.service.exceptions.UnknownResourceException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -30,10 +32,7 @@ public class BookService {
         try {
             return bookRepository.getBookInformationISBN(isbn);
         } catch (IllegalArgumentException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage());
-            List<Book> bookList = new ArrayList<>();
-            bookList.add(new Book(isbn, "Unknown Title", new Author("Unknown id", "Unknown FirstName", "Unknown LastName")));
-            return bookList;
+            throw new UnknownResourceException("Book", "ISBN NR: " + isbn);
         }
     }
 
@@ -41,10 +40,7 @@ public class BookService {
         try {
             return bookRepository.getBookInformationTitle(title);
         } catch (IllegalArgumentException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage());
-            List<Book> bookList = new ArrayList<>();
-            bookList.add(new Book("Unknown ISBN", title, new Author("Unknown id", "Unknown FirstName", "Unknown LastName")));
-            return bookList;
+            throw new UnknownResourceException("Book", "Title: " + title);
         }
     }
 
@@ -52,16 +48,13 @@ public class BookService {
         try {
             return bookRepository.getBooksGivenAuthor(author);
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.getMessage());
-            List<Book> bookList = new ArrayList<>();
-            bookList.add(new Book("Unknown ISBN", "Unknown Title", new Author("Unknown id", "Unknown FirstName", "Unknown LastName")));
-            return bookList;
+            throw new UnknownResourceException("Book", "Title: " + author);
         }
     }
 
     public Book createBook(Book book){
         if(doesBookAlreadyExist(book)){
-            throw new IllegalArgumentException("This book is already in the Digibooky Database");
+            throw new LibraryException("This book is already in the Digibooky Database");
         }
         return bookRepository.createBook(book);
     }
