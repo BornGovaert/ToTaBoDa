@@ -80,5 +80,4 @@ public class BookController {
     public BookDto updateBook(@PathVariable String ISBN, @RequestBody BookDto bookdto) {
        return BookMapper.bookToDto(bookService.updateBook(BookMapper.dtoToBook(bookdto)));
     }
-
 }
