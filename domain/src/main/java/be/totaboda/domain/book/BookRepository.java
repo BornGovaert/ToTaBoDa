@@ -77,7 +77,8 @@ public class BookRepository {
 
     public Book createBook(Book book) {
             authorRepository.addNewAuthor(book.getAuthor());
-            return bookDatabase.put(book.getIsbn(), book);
+            bookDatabase.put(book.getIsbn(), book);
+            return book;
     }
 
     public void deleteBook(String isbn) throws IllegalArgumentException {
@@ -88,12 +89,13 @@ public class BookRepository {
         }
     }
 
-    public void updateBook(Book book) {
+    public Book updateBook(Book book) {
         if (bookDatabase.containsKey(book.getIsbn())) {
             bookDatabase.put(book.getIsbn(), book);
         } else if (!(bookDatabase.containsKey(book.getIsbn()))) {
             throw new IllegalArgumentException("Can't find a book with that isbn");
         }
+        return book;
     }
 
     public Book getBook(String isbn) {

@@ -59,12 +59,23 @@ public class BookService {
         }
     }
 
-    public void updateBook(Book book) {
+    public Book createBook(Book book){
+        if(doesBookAlreadyExist(book)){
+            throw new IllegalArgumentException("This book is already in the Digibooky Database");
+        }
+        return bookRepository.createBook(book);
+    }
+
+    public Book updateBook(Book book) {
        bookRepository.updateBook(book);
+       return book;
     }
 
     public void deleteBook(String isbn) {
         bookRepository.deleteBook(isbn);
+    }
+    public boolean doesBookAlreadyExist(Book book){
+        return bookRepository.getBooks().contains(book);
     }
 
 }
