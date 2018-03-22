@@ -10,33 +10,28 @@ public class BookDto {
     public String authorFirstName;
     public String authorLastName;
 
-    public BookDto() {
 
-    }
-
-    public BookDto(String isbn, String title, String authorFirstName, String authorLastName) {
-        this.isbn = isbn;
-        this.title = title;
+    public BookDto withAuthorFirstName(String authorFirstName) {
         this.authorFirstName = authorFirstName;
+        return this;
+    }
+
+    public BookDto withAuthorLastName(String authorLastName) {
         this.authorLastName = authorLastName;
+        return this;
     }
 
-    public void withAuthorFirstName(String authorFirstName) {
-        this.authorFirstName = authorFirstName;
-    }
-
-    public void withAuthorLastName(String authorLastName) {
-        this.authorLastName = authorLastName;
-    }
-
-    public void withIsbn(String isbn) {
+    public BookDto withIsbn(String isbn) {
         this.isbn = isbn;
+        return this;
     }
 
-    public void withTitle(String title) {
+    public BookDto withTitle(String title) {
         this.title = title;
+        return this;
     }
-    //    public String getIsbn() {
+}
+//    public String getIsbn() {
 //        return isbn;
 //    }
 //
@@ -51,4 +46,4 @@ public class BookDto {
 //    public String getAuthorLastName() {
 //        return authorLastName;
 //    }
-}
+
