@@ -15,9 +15,10 @@ public class RentalRepository {
     }
 
     public void createRental(String memberInss, String bookIsbn){
-       
+
         Rental temporaryRental = new Rental(memberInss, bookIsbn);
         for (Rental newBook: lentBooks) {
+           
         }
 
     }
