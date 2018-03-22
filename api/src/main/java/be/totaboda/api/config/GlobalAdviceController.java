@@ -12,7 +12,7 @@ import be.totaboda.service.exceptions.UnknownUserException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@ControllerAdvice(basePackages = {"be/totaboda"})
+@ControllerAdvice(basePackages = {"be.totaboda"})
 public class GlobalAdviceController {
     private final static Logger LOGGER = Logger.getLogger(UserService.class.getName());
 
