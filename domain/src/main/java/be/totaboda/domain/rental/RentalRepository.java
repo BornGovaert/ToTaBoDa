@@ -12,7 +12,7 @@ public class RentalRepository {
     private static int counterId;
     private int amountOfRentals;
 
-  //  @Inject
+    @Inject
     public RentalRepository() {
         this.lentBooks = new ArrayList<>();
     }
@@ -30,7 +30,7 @@ public class RentalRepository {
             } else if (newBook.getBookIsbn().equals(bookIsbn)) {
                 throw new IllegalArgumentException("This book is already rented out");    //NEEDS CUSTOM EXCEPTIONS
             } else if (amountOfRentals > 2) {
-                throw new IllegalArgumentException("You can only rent 9 bookS.");
+                throw new IllegalArgumentException("You can only rent 9 books.");
             }
         }
         lentBooks.add(rentalObject);

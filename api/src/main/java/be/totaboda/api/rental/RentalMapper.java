@@ -2,6 +2,7 @@ package be.totaboda.api.rental;
 
 import be.totaboda.domain.rental.Rental;
 
+
 public class RentalMapper {
 
     public static RentalDto rentalToDto(Rental rentalToMap){
