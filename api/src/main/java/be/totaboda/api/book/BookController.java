@@ -26,7 +26,7 @@ public class BookController {
     public List<BookDto> getBooks(){
         ArrayList<BookDto> booksDto = new ArrayList<>();
         for (Book book : bookService.getBooks()){
-            booksDto.add(BookMapper.bookMapper(book));
+            booksDto.add(BookMapper.bookToDto(book));
         }
         return booksDto;
     }
@@ -37,7 +37,7 @@ public class BookController {
         ArrayList<BookDto> booksByIsbn = new ArrayList<>();
         List<Book> booksFoundMatchingIsbn = bookService.getBookISBN(isbn);
         for(Book book : booksFoundMatchingIsbn){
-            booksByIsbn.add(BookMapper.bookMapper(book));
+            booksByIsbn.add(BookMapper.bookToDto(book));
         }
         return booksByIsbn;
     }
@@ -47,7 +47,7 @@ public class BookController {
         ArrayList<BookDto> booksByTitle = new ArrayList<>();
         List<Book> booksFoundMatchingTitle = bookService.getBookTitle(title);
         for(Book book : booksFoundMatchingTitle){
-            booksByTitle.add(BookMapper.bookMapper(book));
+            booksByTitle.add(BookMapper.bookToDto(book));
         }
         return booksByTitle;
     }
@@ -58,21 +58,27 @@ public class BookController {
         ArrayList<BookDto> booksByAuthor = new ArrayList<>();
         List<Book> booksFoundMatchingAuthor = bookService.getBookByAuthor(author);
         for(Book book : booksFoundMatchingAuthor){
-            booksByAuthor.add(BookMapper.bookMapper(book));
+            booksByAuthor.add(BookMapper.bookToDto(book));
         }
         return booksByAuthor;
     }
 
-    @PostMapping(produces = "application/json")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteBook(@PathVariable("book") String isbn) {
-        bookService.deleteBook(isbn);
-    }
-
     @PostMapping(consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public void updateBook(@RequestBody BookDto bookdto) {
-        bookService.updateBook(BookMapper.dtoToBook(bookdto));
+    public BookDto createBook(@RequestBody BookDto book){
+        return BookMapper.bookToDto(bookService.createBook(BookMapper.dtoToBook(book)));
+    }
+
+//    @PostMapping(produces = "application/json")
+//    @ResponseStatus(HttpStatus.OK)
+//    public void deleteBook(@PathVariable("book") String isbn) {
+//        bookService.deleteBook(isbn);
+//    }
+//
+    @PutMapping(path="/{isbn}",consumes = "application/json", produces = "application/json")
+    @ResponseStatus(HttpStatus.OK)
+    public BookDto updateBook(@PathVariable String ISBN, @RequestBody BookDto bookdto) {
+       return BookMapper.bookToDto(bookService.updateBook(BookMapper.dtoToBook(bookdto)));
     }
 
 }
