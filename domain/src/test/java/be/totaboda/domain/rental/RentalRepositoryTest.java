@@ -55,8 +55,16 @@ class RentalRepositoryTest {
     }
 
     @Test
-    void createRental_givenMaxOf9RentalsPerMember_throwException(){
-        Assertions.fail("to be implemented");
+    void createRental_givenMaxOf2RentalsPerMember_throwException(){
+        rentalRepo.createRental("820101 383 03", "123");
+        rentalRepo.createRental("820101 383 03", "666");
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
+        -> {
+            rentalRepo.createRental("820101 383 03", "111");
+        });
+
+        Assertions.assertThat(exception.getMessage()).isEqualTo("You can only rent 2 bookS.");
     }
 
 
