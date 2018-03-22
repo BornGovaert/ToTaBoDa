@@ -18,10 +18,10 @@ class RentalRepositoryTest {
 
     @Test
     void createRental_happyPath() {
-        rentalRepo.createRental("791101 199 53", "666");
+        rentalRepo.createRental(1,"666");
 
         Assertions.assertThat(rentalRepo.getLentBooks().get(0))
-                .hasFieldOrPropertyWithValue("memberInss", "791101 199 53")
+                .hasFieldOrPropertyWithValue("memberId", 1)
                 .hasFieldOrPropertyWithValue("bookIsbn", "666");
     }
 
@@ -40,25 +40,25 @@ class RentalRepositoryTest {
 
     @Test
     void createRental_givenUnavailableBook_throwException() {
-        rentalRepo.createRental("791101 199 53", "123");
-        rentalRepo.createRental("820101 383 03", "666");
+        rentalRepo.createRental(1, "123");
+        rentalRepo.createRental(2, "666");
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
         -> {
-            rentalRepo.createRental("820101 383 03", "123");
+            rentalRepo.createRental(2, "123");
         });
 
-        Assertions.assertThat(exception.getMessage()).isEqualTo("\"This book is already rented out\"");
+        Assertions.assertThat(exception.getMessage()).isEqualTo("This book is already rented out");
     }
 
     @Test
     void createRental_givenMaxOf2RentalsPerMember_throwException(){
-        rentalRepo.createRental("820101 383 03", "123");
-        rentalRepo.createRental("820101 383 03", "666");
+        rentalRepo.createRental(1, "123");
+        rentalRepo.createRental(1, "666");
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
         -> {
-            rentalRepo.createRental("820101 383 03", "111");
+            rentalRepo.createRental(1, "111");
         });
 
         Assertions.assertThat(exception.getMessage()).isEqualTo("You can only rent 2 bookS.");
