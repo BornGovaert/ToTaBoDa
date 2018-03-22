@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class UserDto {
     public String Inss, lastName, firstName, eMail, streetName, streetNumber, postalCode, city;
     public int userId;
-    public Role role;
+    public String role;
 
     public UserDto withInss(String inss) {
         Inss = inss;
@@ -55,7 +55,7 @@ public class UserDto {
     }
 
     public UserDto withRole(Role role) {
-        this.role = role;
+        this.role = role.toString();
         return this;
     }
 }

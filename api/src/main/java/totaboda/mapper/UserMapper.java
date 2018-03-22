@@ -2,6 +2,7 @@ package totaboda.mapper;
 
 import totaboda.users.LoggedInUser;
 import totaboda.users.Member;
+import totaboda.users.Role;
 import totaboda.users.UserBuilder;
 import totaboda.dtos.UserDto;
 
@@ -45,14 +46,15 @@ public class UserMapper {
     public LoggedInUser mapDtoToEmployee(UserDto userDto){
         return UserBuilder.buildUser()
                 .withFirstName(userDto.firstName)
-                .withFirstName(userDto.lastName)
+                .withLastName(  userDto.lastName)
                 .withEMail(userDto.eMail)
-                .withRole(userDto.role)
+                .withRole(Enum.valueOf(Role.class, userDto.role))
                 .buildEmployee();
     }
 
     public UserDto mapEmployeeToDto(LoggedInUser user){
         return new UserDto()
+                .withUserId(user.getUserId())
                 .withFirstName(user.getFirstName())
                 .withFirstName(user.getLastName())
                 .witheMail(user.geteMail())
