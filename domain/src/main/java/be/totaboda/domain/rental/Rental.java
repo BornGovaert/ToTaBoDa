@@ -5,15 +5,15 @@ import java.time.LocalDate;
 public class Rental {
 
     private int id;
-    private String memberInss;
+    private int memberId;
     private String bookIsbn;
     private LocalDate startDate;
     private LocalDate returnDate;
 
 
-    public Rental(String memberInss, String bookIsbn) {
+    public Rental(int memberId, String bookIsbn) {
         this.id = RentalRepository.getCounterId();
-        this.memberInss = memberInss;
+        this.memberId = memberId;
         this.bookIsbn = bookIsbn;
         this.startDate = LocalDate.now();
         this.returnDate = startDate.plusWeeks(3) ;
@@ -23,8 +23,8 @@ public class Rental {
         return id;
     }
 
-    public String getMemberInss() {
-        return memberInss;
+    public int getMemberInss() {
+        return memberId;
     }
 
     public String getBookIsbn() {
@@ -43,8 +43,8 @@ public class Rental {
         this.id = id;
     }
 
-    public void setMemberInss(String memberInss) {
-        this.memberInss = memberInss;
+    public void setMemberInss(int memberId) {
+        this.memberId = memberId;
     }
 
     public void setBookIsbn(String bookIsbn) {

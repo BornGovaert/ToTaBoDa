@@ -17,11 +17,11 @@ public class RentalRepository {
         this.lentBooks = lentBooks;
     }
 
-    public void createRental(String memberInss, String bookIsbn) {
+    public void createRental(int memberId, String bookIsbn) {
         counterId++;
-        Rental rentalObject = new Rental(memberInss, bookIsbn);
+        Rental rentalObject = new Rental(memberId, bookIsbn);
         for (Rental newBook : lentBooks) {
-            if (newBook.getMemberInss().equals(memberInss)) {
+            if (newBook.getMemberInss() == memberId) {
                 amountOfRentals++;
             } else if (newBook.getBookIsbn().equals(bookIsbn)) {
                 throw new IllegalArgumentException("This book is already rented out");    //NEEDS CUSTOM EXCEPTIONS
