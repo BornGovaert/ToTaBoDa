@@ -3,7 +3,6 @@ package be.totaboda.service;
 import be.totaboda.domain.book.BookRepository;
 import be.totaboda.domain.rental.RentalRepository;
 import be.totaboda.domain.users.UserRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -32,23 +31,13 @@ class RentalServiceTest {
     }
 
     @Test
-    void createRental_givenIncorrectBookIsbn_hrowException(){
-        doThrow(new IllegalArgumentException("Please provide valid id or isbn")).when(mockRentalRepo).createRental(1, "555");
+    void createRental_givenIncorrectBookIsbn_throwException(){
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
-                -> {
-            rentalService.createRental(1, "555");
-        });
     }
 
     @Test
-    void createRental_givenIncorrectMemberInss_throwException(){
-        doThrow(new IllegalArgumentException("Please provide valid id or isbn")).when(mockRentalRepo).createRental(10, "111");
+    void createRental_givenIncorrectMemberId_throwException(){
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
-                -> {
-            rentalService.createRental(10, "111");
-        });
     }
 
 

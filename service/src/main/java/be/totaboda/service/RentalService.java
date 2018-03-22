@@ -29,7 +29,13 @@ public class RentalService {
 
     public void createRental(int memberId, String bookIsbn) {
         boolean noRentalCreatedYet = true;
-        if (memberId != 0 && bookIsbn != null && noRentalCreatedYet) {
+        if (memberId > 0 && bookIsbn != null) {
+
+            //Member theMemberIneed = getMemberForMemberId(memberId);
+            // Book bookOfMemberForIsbn = getBookOfMemberByIsbn()
+            // if (bookOfMemberForIsbn) { addItToRepo }
+            // else throw exception
+
             for (Member member : userRepository.getAllMembers()) {
                 if (member.getUserId() == memberId) {
                     for (Book book : bookRepository.getBooks()) {
@@ -43,7 +49,7 @@ public class RentalService {
                 }
             }
         }
-        if (noRentalCreatedYet = false) {
+        if (noRentalCreatedYet == false) {
             throw new IllegalArgumentException("Please provide valid id or isbn");
         } else {
             throw new IllegalArgumentException("Please provide valid id or isbn");
