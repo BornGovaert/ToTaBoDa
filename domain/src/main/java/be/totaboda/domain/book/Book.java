@@ -8,11 +8,13 @@ public class Book {
     private final String isbn;
     private String title;
     private Author author;
+    private boolean isDeleted;
 
     public Book(String isbn, String title, Author author) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
+        this.isDeleted = false;
     }
 
     public String getIsbn() {
@@ -43,6 +45,18 @@ public class Book {
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    public void deleteBook() {
+        isDeleted=true;
+    }
+
+    public void restoreBook(){
+        isDeleted=false;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
     @Override

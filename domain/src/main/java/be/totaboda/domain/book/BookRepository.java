@@ -9,12 +9,13 @@ import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 @Named
 public class BookRepository {
 
     private AuthorRepository authorRepository = new AuthorRepository();
 
-    private  HashMap<String, Book> bookDatabase =
+    private HashMap<String, Book> bookDatabase =
             Maps.newHashMap(
                     new ImmutableMap.Builder<String, Book>()
                             .put("123", new Book("123", "Azkaban", authorRepository.getAuthorDatabase().get("1")))
@@ -58,9 +59,9 @@ public class BookRepository {
         List<Book> listOfBooks = new ArrayList<>();
         String concatenatedName;
         for (Book book : bookDatabase.values()) {
-            concatenatedName = (book.getAuthor().getFirstName()+ book.getAuthor()
+            concatenatedName = (book.getAuthor().getFirstName() + book.getAuthor()
                     .getLastName()).toLowerCase();
-            if (concatenatedName.contains((author.replaceAll("[^a-zA-Z]","")).toLowerCase())) {
+            if (concatenatedName.contains((author.replaceAll("[^a-zA-Z]", "")).toLowerCase())) {
                 listOfBooks.add(book);
             }
         }
@@ -74,58 +75,40 @@ public class BookRepository {
         return new ArrayList<>(bookDatabase.values());
     }
 
-    public Book createBook(String isbn, String title, String lastName) {
-        ArrayList<Author> authorList = new ArrayList<>();
-        for (Author author : authorRepository.getAuthorDatabase().values()) {
-            if (author.getLastName().toLowerCase().equals(lastName.toLowerCase())) {
-                authorList.add(author);
-            }
-        }
-        if (authorList.size() > 1) {
-            throw new IllegalArgumentException("More then one author found with that last name");
-        } else if (authorList.size() == 0) {
-            throw new IllegalArgumentException("Author doesn't exist, create author first");
-        } else {
-            return bookDatabase.put(isbn, new Book(isbn, title, authorList.get(0)));
-        }
+    public Book createBook(Book book) {
+            authorRepository.addNewAuthor(book.getAuthor());
+            return bookDatabase.put(book.getIsbn(), book);
     }
-
-    private static ArrayList<Book> backupBookList = new ArrayList<>();
 
     public void deleteBook(String isbn) throws IllegalArgumentException {
         if (bookDatabase.containsKey(isbn)) {
-            backupBookList.add(bookDatabase.get(isbn));
-            bookDatabase.remove(isbn);
+            bookDatabase.get(isbn).deleteBook();
         } else {
             throw new IllegalArgumentException("Can't find a book with that isbn");
         }
-
     }
 
     public void updateBook(Book book) {
         if (bookDatabase.containsKey(book.getIsbn())) {
             bookDatabase.put(book.getIsbn(), book);
-        } else if (!(bookDatabase.containsKey(book.getIsbn())))
-        {
+        } else if (!(bookDatabase.containsKey(book.getIsbn()))) {
             throw new IllegalArgumentException("Can't find a book with that isbn");
         }
-        for (
-                Book bookInList : backupBookList)
-        {
-            if (bookInList.getIsbn().equals(book.getIsbn())) {
-                backupBookList.set(backupBookList.indexOf(bookInList), book);
-            }
-        }
-
     }
 
-    public void restoreBook(Book book) {
-        for (Book bookInList : backupBookList) {
-            if (bookInList.getIsbn().equals(book.getIsbn())) {
-                bookDatabase.put(bookInList.getIsbn(), bookInList);
+    public Book getBook(String isbn) {
+        return bookDatabase.get(isbn);
+    }
 
-            }
+    public void restoreBook(String isbn) {
+        if (verifyIfBookExists(isbn)) {
+            bookDatabase.get(isbn).restoreBook();
+        } else {
+            throw new IllegalArgumentException("Can't find a book with that isbn");
         }
     }
 
+    public boolean verifyIfBookExists(String isbn) {
+        return bookDatabase.containsKey(isbn);
+    }
 }
