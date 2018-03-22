@@ -1,5 +1,6 @@
 package be.totaboda.api.config;
 
+import be.totaboda.service.exceptions.LibraryException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -30,5 +31,13 @@ public class GlobalAdviceController {
         return new ResponseEntity<>(
                 exception.getMessage(),
                 HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(LibraryException.class)
+    public ResponseEntity<String> returnSatusForLibraryException(final UnknownUserException exception)
+    {
+        LOGGER.log(Level.SEVERE,"ERROR: " + exception.getMessage());
+        return new ResponseEntity<>(
+                exception.getMessage(),
+                HttpStatus.BAD_REQUEST);
     }
 }
