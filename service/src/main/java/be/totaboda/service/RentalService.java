@@ -73,13 +73,13 @@ public class RentalService {
     }
 
     public boolean ifMemberWithIdExists(int memberId) {
-        boolean test = false;
+
         for (Member member : userRepository.getAllMembers()) {
             if (member.getUserId() == memberId) {
-                test = true;
+               return true;
             }
         }
-        return test;
+        return false;
     }
 
     public void returnBook(int id) {
