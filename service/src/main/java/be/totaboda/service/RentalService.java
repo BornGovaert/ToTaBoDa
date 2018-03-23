@@ -29,31 +29,58 @@ public class RentalService {
         this.bookRepository = bookRepository;
     }
 
-    public Rental createRental(int memberId, String bookIsbn) {
-        boolean noRentalCreatedYet = true;
-        if (memberId != 0 && bookIsbn != null && noRentalCreatedYet) {
-            for (Member member : userRepository.getAllMembers()) {
-                if (member.getUserId() == memberId) {
-                    for (Book book : bookRepository.getBooks()) {
-                        if (book.getIsbn().equals(bookIsbn)) {
-                            rentalRepository.createRental(memberId, bookIsbn);
-                            noRentalCreatedYet = false;
-                        } else {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-//        if (noRentalCreatedYet = false) {
+//    public Rental createRental(int memberId, String bookIsbn) {
+//        boolean noRentalCreatedYet = true;
+//        if (memberId != 0 && bookIsbn != null && noRentalCreatedYet) {
+//            for (Member member : userRepository.getAllMembers()) {
+//                if (member.getUserId() == memberId) {
+//                    for (Book book : bookRepository.getBooks()) {
+//                        if (book.getIsbn().equals(bookIsbn)) {
+//                            rentalRepository.createRental(memberId, bookIsbn);
+//                            noRentalCreatedYet = false;
+//                        } else {
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+////        if (noRentalCreatedYet = false) {
+////            throw new LibraryException("Please provide valid id or isbn");
+//        //     }
+//        else {
 //            throw new LibraryException("Please provide valid id or isbn");
-        //     }
-        else {
-            throw new LibraryException("Please provide valid id or isbn");
+//        }
+//        return rentalRepository.createRental(memberId, bookIsbn);
+//    }
+
+    public Rental createRental(int memberId, String bookIsbn) {
+        if (ifMemberWithIdExists(memberId) && ifBookWithIsbnExists(bookIsbn)) {
+            return rentalRepository.createRental(memberId, bookIsbn);
+        } else {
+
+            throw new IllegalArgumentException("Please provide valid id or isbn");
         }
-        return rentalRepository.createRental(memberId, bookIsbn);
     }
 
+    public boolean ifBookWithIsbnExists(String bookIsbn) {
+        for (Book book : bookRepository.getBooks()) {
+            if (book.getIsbn().equals(bookIsbn)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean ifMemberWithIdExists(int memberId) {
+        boolean test = false;
+        for (Member member : userRepository.getAllMembers()) {
+            if (member.getUserId() == memberId) {
+                test = true;
+            }
+        }
+        return test;
+    }
 
     public void returnBook(int id) {
         rentalRepository.returnBook(id);
